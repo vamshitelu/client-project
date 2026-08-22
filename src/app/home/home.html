@@ -1,0 +1,51 @@
+<main class="home-shell">
+  <nav class="tabs" aria-label="Financial sections" role="tablist">
+    <button
+      class="tab"
+      [class.active]="activeTab() === 'revenue'"
+      id="revenue-tab"
+      type="button"
+      role="tab"
+      [attr.aria-selected]="activeTab() === 'revenue'"
+      aria-controls="revenue-panel"
+      (click)="selectTab('revenue')"
+    >Revenue</button>
+    <button
+      class="tab"
+      [class.active]="activeTab() === 'expenses'"
+      id="expenses-tab"
+      type="button"
+      role="tab"
+      [attr.aria-selected]="activeTab() === 'expenses'"
+      aria-controls="expenses-panel"
+      (click)="selectTab('expenses')"
+    >Expenses</button>
+    <button
+      class="tab"
+      [class.active]="activeTab() === 'history'"
+      id="history-tab"
+      type="button"
+      role="tab"
+      [attr.aria-selected]="activeTab() === 'history'"
+      aria-controls="history-panel"
+      (click)="selectTab('history')"
+    >History</button>
+  </nav>
+
+  @if (activeTab() === 'revenue') {
+    <section id="revenue-panel" role="tabpanel" aria-labelledby="revenue-tab">
+      <app-revenue />
+    </section>
+  }@else if (activeTab() === 'expenses') {
+    <section id="expenses-panel" role="tabpanel" aria-labelledby="expenses-tab">
+      <h1>Expenses</h1>
+      <p>Expense tracking will be available here.</p>
+    </section>
+  } 
+  @else {
+    <section id="history-panel" class="empty-panel" role="tabpanel" aria-labelledby="history-tab">
+      <h1>History</h1>
+      <p>History will be available here.</p>
+    </section>
+  }
+</main>
