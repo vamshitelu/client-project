@@ -10,9 +10,27 @@
       <label class="field"><span>Entity Name</span><input type="text" formControlName="entityName" /></label>
       <label class="field"><span>Federal ID</span><input type="text" formControlName="federalId" /></label>
 
-      <label class="field"><span>Agency</span><select formControlName="agency"><option value="">Please Select</option>@for (agency of agencies; track agency) { <option [value]="agency">{{ agency }}</option> }</select></label>
-      <label class="field"><span>Division</span><select formControlName="division"><option value="">Please Select</option>@for (division of divisions; track division) { <option [value]="division">{{ division }}</option> }</select></label>
-      <label class="field"><span>Department</span><select formControlName="department"><option value="">Please Select</option>@for (department of departments; track department) { <option [value]="department">{{ department }}</option> }</select></label>
+      <label class="field">
+        <span>Agency</span>
+        <select formControlName="agency">
+          <option value="">Please Select</option>
+          @for (agency of agencies; track agency) { <option [value]="agency">{{ agency }}</option> }
+        </select>
+      </label>
+      <label class="field">
+        <span>Division</span>
+        <select formControlName="division">
+          <option value="">Please Select</option>
+          @for (division of divisions; track division) { <option [value]="division">{{ division }}</option> }
+        </select>
+      </label>
+      <label class="field">
+        <span>Department</span>
+        <select formControlName="department">
+          <option value="">Please Select</option>
+          @for (department of departments; track department) { <option [value]="department">{{ department }}</option> }
+        </select>
+      </label>
     </div>
 
     <div class="two-column-fields">
