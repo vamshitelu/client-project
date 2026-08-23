@@ -1,0 +1,87 @@
+<nav [attr.aria-label]="ariaLabel()">
+  <ul class="pagination pagination-sm">
+
+    <!-- First -->
+    <li [class.disabled]="isFirstPage()">
+      <a
+        href="#"
+        aria-label="First page"
+        (click)="$event.preventDefault(); goToPage(1)"
+        [attr.aria-disabled]="isFirstPage()"
+        [attr.tabindex]="isFirstPage() ? -1 : 0"
+      >&laquo;</a>
+    </li>
+
+    <!-- Previous -->
+    <li [class.disabled]="isFirstPage()">
+      <a
+        href="#"
+        aria-label="Previous page"
+        (click)="$event.preventDefault(); goToPage(currentPage() - 1)"
+        [attr.aria-disabled]="isFirstPage()"
+        [attr.tabindex]="isFirstPage() ? -1 : 0"
+      >&lsaquo;</a>
+    </li>
+
+    <!-- Previous-block ellipsis: jumps to the last page of the preceding block -->
+    @if (hasPreviousPages()) {
+      <li>
+        <a
+          href="#"
+          aria-label="Previous page block"
+          (click)="$event.preventDefault(); pageChange.emit(startPage() - 1)"
+        >...</a>
+      </li>
+    }
+
+    <!-- Page number links for the active 10-page block -->
+    @for (page of visiblePages(); track page) {
+      <li [class.active]="page === currentPage()" [attr.aria-current]="page === currentPage() ? 'page' : null">
+        @if (page === currentPage()) {
+          <!-- Current page: rendered as non-interactive span per Bootstrap 3 / WCAG -->
+          <span>{{ page }}<span class="sr-only">(current)</span></span>
+        } @else {
+          <a
+            href="#"
+            (click)="$event.preventDefault(); pageChange.emit(page)"
+            [attr.aria-label]="'Page ' + page"
+          >{{ page }}</a>
+        }
+      </li>
+    }
+
+    <!-- Next-block ellipsis: jumps to the first page of the following block -->
+    @if (hasMorePages()) {
+      <li>
+        <a
+          href="#"
+          aria-label="Next page block"
+          (click)="$event.preventDefault(); pageChange.emit(startPage() + 10)"
+        >...</a>
+      </li>
+    }
+
+    <!-- Next -->
+    <li [class.disabled]="isLastPage()">
+      <a
+        href="#"
+        aria-label="Next page"
+        (click)="$event.preventDefault(); goToPage(currentPage() + 1)"
+        [attr.aria-disabled]="isLastPage()"
+        [attr.tabindex]="isLastPage() ? -1 : 0"
+      >&rsaquo;</a>
+    </li>
+
+    <!-- Last -->
+    <li [class.disabled]="isLastPage()">
+      <a
+        href="#"
+        aria-label="Last page"
+        (click)="$event.preventDefault(); goToPage(totalPages())"
+        [attr.aria-disabled]="isLastPage()"
+        [attr.tabindex]="isLastPage() ? -1 : 0"
+      >&raquo;</a>
+    </li>
+
+  </ul>
+</nav>

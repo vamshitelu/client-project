@@ -1,13 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { Revenue } from './revenue';
 
 describe('Revenue', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Revenue],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
   });
 
@@ -25,21 +22,15 @@ describe('Revenue', () => {
 
   it('should assign dummy response values to the dropdowns', () => {
     const fixture = TestBed.createComponent(Revenue);
-    const httpTesting = TestBed.inject(HttpTestingController);
     fixture.detectChanges();
 
-    httpTesting.expectOne('assets/data/response-lite.json').flush({
-      agencyLookupList: [{ agencyName: 'Agency A' }],
-      divisionLookupList: [{ divisionName: 'Division A' }],
-      departmentLookupList: [{ departmentName: 'Department A' }],
-      rgcStatusLookupList: [{ rgcStatusName: 'Active' }],
-      revenueLeadLookupList: [{ name: 'Lead A' }],
-    });
-
-    expect(fixture.componentInstance['agencies']).toEqual(['Agency A']);
-    expect(fixture.componentInstance['divisions']).toEqual(['Division A']);
-    expect(fixture.componentInstance['departments']).toEqual(['Department A']);
+    expect(fixture.componentInstance['agencies'][0].agencyName).toBe('DFPS');
+    fixture.componentInstance['searchForm'].controls.agency.setValue('DFPS');
+    fixture.componentInstance['agencyChanged']('DFPS');
+    expect(fixture.componentInstance['searchForm'].getRawValue().agencyId).toBe('2');
+    expect(fixture.componentInstance['divisions']).toEqual(['Audit and Compliance']);
+    expect(fixture.componentInstance['departments']).toEqual(['Access and Eligibility']);
     expect(fixture.componentInstance['rgcStatuses']).toEqual(['Active']);
-    expect(fixture.componentInstance['revenueLeads']).toEqual(['Lead A']);
+    expect(fixture.componentInstance['revenueLeads']).toEqual(['Acosta, Elizabeth']);
   });
 });

@@ -93,3 +93,31 @@ export class ResponseLite {
   rgcDocumentTypeLookupList: RgcDocumentTypeLookup[] = [];
   stateTypeLookupList: StateTypeLookup[] = [];
 }
+
+export interface RevenueGeneratingContract {
+  rgcId: number;
+  rgcNumber: string;
+  agency: string;
+  entityName: string;
+  status: string;
+  beginDate: number | null;
+  endDate: number | null;
+  division: string;
+  department: string;
+  objective: string;
+  expectedRevenue: number | null;
+  revenueLead: string;
+  permissions: readonly unknown[];
+}
+
+export interface RevenueGeneratingContractResponse {
+  _embedded: {
+    revenueGeneratingContractList: RevenueGeneratingContract[];
+  };
+  page: {
+    size: number;
+    totalElements: number;
+    totalPages: number;
+    number: number;
+  };
+}

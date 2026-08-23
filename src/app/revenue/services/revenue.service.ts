@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ResponseLite } from '../models/RevenueSearchCriteria';
+import {
+  ResponseLite,
+  RevenueGeneratingContractResponse,
+} from '../models/RevenueSearchCriteria';
 import responseLite from '../../../assets/data/response-lite.json';
+import contractResponse from '../../../assets/data/revenueGeneratingContractList.json';
 
 export interface RevenueSearchCriteria {
   rgcId: string;
@@ -28,7 +32,14 @@ export class RevenueService {
     return of(responseLite as ResponseLite);
   }
 
+  getRevenueGeneratingContracts(): Observable<RevenueGeneratingContractResponse> {
+    return of(contractResponse as RevenueGeneratingContractResponse);
+  }
+
   search(criteria: RevenueSearchCriteria): RevenueSearchCriteria {
+   // const url = 'https://testscor.hhs.state.tx.us/rgcontracts?
+   // searchParams=agengy,isStartWith&searchParamValues=1,false&page=0&size=10';
+   
     return { ...criteria };
   }
 }

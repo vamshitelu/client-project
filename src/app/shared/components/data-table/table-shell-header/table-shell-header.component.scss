@@ -1,0 +1,43 @@
+.table-shell-chrome {
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.table-shell-record-count {
+  display: inline-block;
+  line-height: 30px; // matches Bootstrap form-control height
+}
+
+.table-shell-page-size-label {
+  margin-right: 6px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.table-shell-page-size-select {
+  display: inline-block;
+  width: 74px;
+  vertical-align: middle;
+}
+
+.table-shell-pagination {
+  padding-top: 4px;
+
+  nav {
+    display: inline-block;
+  }
+
+  .pagination {
+    margin: 0;
+  }
+}
+
+:host ::ng-deep thead.text-center th,
+:host ::ng-deep tbody.text-center td {
+  text-align: center;
+}
+
+:host ::ng-deep thead.text-right th,
+:host ::ng-deep tbody.text-right td {
+  text-align: right;
+}

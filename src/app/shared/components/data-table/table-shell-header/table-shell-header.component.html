@@ -1,0 +1,76 @@
+<!-- Chrome bar: record count + page-size selector -->
+@if (hasMetadataChrome()) {
+  <div class="row table-shell-chrome">
+
+    @if (showRecordCount()) {
+      <div
+        class="col-md-4"
+        [class.col-md-12]="!showPageSizeSelector()"
+      >
+        <span class="table-shell-record-count">
+          <strong>
+            @if (totalItems() === 0) {
+              Total No. of Records: 0
+            } @else {
+              <!-- Showing {{ startRecord() }}&ndash;{{ endRecord() }} of {{ totalItems() }} records -->
+              Total No. of Records: {{ totalItems() }}
+            }
+          </strong>
+        </span>
+      </div>
+    }
+
+    @if (showPageSizeSelector()) {
+      <div
+        class="col-md-8 text-right"
+        [class.col-md-12]="!showRecordCount()"
+      >
+        <label for="pageSizeSelect" class="table-shell-page-size-label">
+          No. of Records Per page
+        </label>
+        <select
+          id="pageSizeSelect"
+          class="form-control table-shell-page-size-select"
+          [ngModel]="pageSize()"
+          (ngModelChange)="onPageSizeChange($event)"
+          aria-label="Records per page"
+        >
+          @for (opt of pageSizeOptions(); track opt) {
+            <option [value]="opt">{{ opt }}</option>
+          }
+        </select>
+      </div>
+    }
+
+  </div>
+}
+
+<!-- Optional feature toolbar area (renders below record chrome and above table) -->
+<ng-content select="[tableToolbar]" />
+
+<!-- Table projection area -->
+<div class="table-responsive">
+  <table [class]="tableClasses()" [attr.aria-label]="tableAriaLabel()">
+    <thead [class]="headerAlignClass()">
+      <ng-content select="[tableHeaders]" />
+    </thead>
+    <tbody [class]="cellAlignClass()">
+      <ng-content select="[tableRows]" />
+    </tbody>
+    @if (showPagination()) {
+      <tfoot>
+        <tr>
+          <td [attr.colspan]="999" class="text-center table-shell-pagination">
+            <app-pagination
+              [totalItems]="totalItems()"
+              [itemsPerPage]="pageSize()"
+              [currentPage]="currentPage()"
+              [ariaLabel]="paginationAriaLabel()"
+              (pageChange)="onPageChange($event)"
+            />
+          </td>
+        </tr>
+      </tfoot>
+    }
+  </table>
+</div>

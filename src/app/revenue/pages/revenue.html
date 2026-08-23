@@ -12,10 +12,11 @@
 
       <label class="field">
         <span>Agency</span>
-        <select formControlName="agency">
+        <select formControlName="agency" (change)="agencyChanged($any($event.target).value)">
           <option value="">Please Select</option>
-          @for (agency of agencies; track agency) { <option [value]="agency">{{ agency }}</option> }
+          @for (agency of agencies; track agency.agencyId) { <option [value]="agency.agencyName">{{ agency.agencyName }}</option> }
         </select>
+        <input type="hidden" formControlName="agencyId" />
       </label>
       <label class="field">
         <span>Division</span>
@@ -57,4 +58,40 @@
     </div>
     @if (searchSubmitted()) { <p class="search-status" role="status">Search submitted.</p> }
   </form>
+
+  @if (searchSubmitted()) {
+    <app-table-shell-header
+      [totalItems]="totalResults()"
+      [currentPage]="currentPage()"
+      [pageSize]="pageSize()"
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      tableAriaLabel="Revenue generating contracts"
+      paginationAriaLabel="Revenue contract results pagination"
+      (pageSizeChange)="pageSizeChanged($event)"
+      (pageChange)="pageChanged($event)"
+    >
+      <tr tableHeaders>
+        <th>RGC ID</th>
+        <th>Agency</th>
+        <th>Entity Name</th>
+        <th>RGC Status</th>
+        <th>Begin Date</th>
+        <th>End Date</th>
+      </tr>
+      @for (contract of searchResults(); track contract.rgcId) {
+        <tr tableRows>
+          <td>{{ contract.rgcNumber }}</td>
+          <td>{{ contract.agency }}</td>
+          <td>{{ contract.entityName }}</td>
+          <td>{{ contract.status }}</td>
+          <td>{{ contract.beginDate | date: 'MM/dd/yyyy' }}</td>
+          <td>{{ contract.endDate | date: 'MM/dd/yyyy' }}</td>
+        </tr>
+      } @empty {
+        <tr tableRows>
+          <td colspan="6">No records found.</td>
+        </tr>
+      }
+    </app-table-shell-header>
+  }
 </main>
