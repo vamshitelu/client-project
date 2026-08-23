@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { ResponseLite } from '../models/RevenueSearchCriteria';
+import responseLite from '../../../assets/data/response-lite.json';
 
 export interface RevenueSearchCriteria {
   rgcId: string;
@@ -20,24 +23,9 @@ export interface RevenueSearchCriteria {
 
 @Injectable({ providedIn: 'root' })
 export class RevenueService {
-  retrieveAgencies(): readonly string[] {
-    return ['Agency A', 'Agency B'];
-  }
-
-  retrieveDivisions(): readonly string[] {
-    return ['Division A', 'Division B'];
-  }
-
-  retrieveDepartments(): readonly string[] {
-    return ['Department A', 'Department B'];
-  }
-
-  retrieveRgcStatuses(): readonly string[] {
-    return ['Active', 'Inactive'];
-  }
-
-  retrieveRevenueLeads(): readonly string[] {
-    return ['Lead A', 'Lead B'];
+  getDummyResponse(): Observable<ResponseLite> {
+    // return this.http.get<ResponseLite>('assets/data/response-lite.json');
+    return of(responseLite as ResponseLite);
   }
 
   search(criteria: RevenueSearchCriteria): RevenueSearchCriteria {

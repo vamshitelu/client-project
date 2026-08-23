@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ResponseLite } from '../models/RevenueSearchCriteria';
 import { RevenueService } from '../services/revenue.service';
 
 @Component({
@@ -9,15 +10,31 @@ import { RevenueService } from '../services/revenue.service';
   styleUrl: './revenue.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Revenue {
+export class Revenue implements OnInit {
   private readonly formBuilder = new FormBuilder().nonNullable;
   private readonly revenueService = inject(RevenueService);
+  private readonly changeDetector = inject(ChangeDetectorRef);
   protected readonly searchSubmitted = signal(false);
-  protected readonly agencies = this.revenueService.retrieveAgencies();
-  protected readonly divisions = this.revenueService.retrieveDivisions();
-  protected readonly departments = this.revenueService.retrieveDepartments();
-  protected readonly rgcStatuses = this.revenueService.retrieveRgcStatuses();
-  protected readonly revenueLeads = this.revenueService.retrieveRevenueLeads();
+  protected agencies: readonly string[] = [];
+  protected divisions: readonly string[] = [];
+  protected departments: readonly string[] = [];
+  protected rgcStatuses: readonly string[] = [];
+  protected revenueLeads: readonly string[] = [];
+
+  ngOnInit(): void {
+    this.revenueService.getDummyResponse().subscribe((response: ResponseLite) => {
+      this.assignDropdownOptions(response);
+    });
+  }
+
+  private assignDropdownOptions(response: ResponseLite): void {
+    this.agencies = response.agencyLookupList.map((agency) => agency.agencyName);
+    this.divisions = response.divisionLookupList.map((division) => division.divisionName);
+    this.departments = response.departmentLookupList.map((department) => department.departmentName);
+    this.rgcStatuses = response.rgcStatusLookupList.map((status) => status.rgcStatusName);
+    this.revenueLeads = response.revenueLeadLookupList.map((lead) => lead.name);
+    this.changeDetector.markForCheck();
+  }
 
   protected readonly searchForm = this.formBuilder.group({
     rgcId: [''], entityName: [''], federalId: [''], agency: [''], division: [''],
@@ -27,7 +44,9 @@ export class Revenue {
   });
 
   protected search(): void {
-    this.revenueService.search(this.searchForm.getRawValue());
+    const criteria = this.searchForm.getRawValue();
+    console.log('Revenue search request:', criteria);
+    this.revenueService.search(criteria);
     this.searchSubmitted.set(true);
   }
 

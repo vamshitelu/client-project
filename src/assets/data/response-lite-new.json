@@ -1,0 +1,95 @@
+{
+	"agencyLookupList":[
+		{
+            "agencyId": "2",
+            "agencyName": "DFPS",
+            "createdBy": null,
+            "updatedBy": null,
+            "createdDate": null,
+            "updatedDate": null,
+            "effectiveDate": null,
+            "expirationDate": null,
+            "disable": false
+        }
+	],
+	"divisionLookupList":[
+		{
+            "divisionId": "15",
+            "divisionName": "Audit and Compliance",
+            "agencyId": "1",
+            "createdBy": null,
+            "updatedBy": null,
+            "createdDate": null,
+            "updatedDate": null,
+            "effectiveDate": null,
+            "expirationDate": null,
+            "disable": false
+        }
+	],
+	"departmentLookupList":[
+		{
+            "departmentId": "1",
+            "departmentName": "Access and Eligibility",
+            "divisionId": "17",
+            "createdBy": null,
+            "updatedBy": null,
+            "createdDate": null,
+            "updatedDate": null,
+            "effectiveDate": null,
+            "expirationDate": null,
+            "disable": true
+        }
+	],
+	"rgcStatusLookupList":[
+		{
+            "rgcStatusId": 1,
+            "rgcStatusName": "Active",
+            "createdBy": null,
+            "updatedBy": null,
+            "createdDate": null,
+            "updatedDate": null,
+            "effectiveDate": null,
+            "expirationDate": null,
+            "disable": false
+        }
+	],
+	"revenueLeadLookupList":[
+		{
+            "userId": 3876,
+            "userName": "00000217127",
+            "name": "Acosta, Elizabeth",
+            "userAssigned": true,
+            "agencyName": "HHSC",
+            "scorUser": true,
+            "disable": true
+        }
+	],
+	"rgcDocumentTypeLookupList":[
+		{
+            "documentTypeId": "1",
+            "documentTypeName": "Amendment - Adverse Termination",
+            "createdBy": null,
+            "updatedBy": null,
+            "documentNomenclatureFormat": null,
+            "createdDate": null,
+            "updatedDate": null,
+            "effectiveDate": null,
+            "expirationDate": null,
+            "formName": null,
+            "disable": false
+        }
+	],
+	"stateTypeLookupList":[
+		{
+            "stateId": 2,
+            "stateName": "AK",
+            "createdBy": "scor",
+            "updatedBy": "scor",
+            "createdDate": 1474137713000,
+            "updatedDate": 1493240650073,
+            "effectiveDate": 1431406800000,
+            "expirationDate": null,
+            "disable": false
+        }
+	]
+}
