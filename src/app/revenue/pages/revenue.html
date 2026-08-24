@@ -20,7 +20,7 @@
       </label>
       <label class="field">
         <span>Division</span>
-        <select formControlName="division">
+        <select formControlName="division" (change)="divisionChanged($any($event.target).value)">
           <option value="">Please Select</option>
           @for (division of divisions; track division) { <option [value]="division">{{ division }}</option> }
         </select>

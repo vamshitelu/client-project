@@ -4,7 +4,10 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TableShellHeaderComponent } from '../../shared/components/data-table/table-shell-header/table-shell-header.component';
 import {
   AgencyLookup,
+  DepartmentLookup,
+  DivisionLookup,
   ResponseLite,
+  RevenueLeadLookup,
   RevenueGeneratingContract,
 } from '../models/RevenueSearchCriteria';
 import { RevenueService } from '../services/revenue.service';
@@ -23,9 +26,12 @@ export class Revenue implements OnInit {
   protected readonly searchSubmitted = signal(false);
   protected agencies: readonly AgencyLookup[] = [];
   protected divisions: readonly string[] = [];
+  private divisionLookups: readonly DivisionLookup[] = [];
   protected departments: readonly string[] = [];
+  private departmentLookups: readonly DepartmentLookup[] = [];
   protected rgcStatuses: readonly string[] = [];
   protected revenueLeads: readonly string[] = [];
+  private revenueLeadLookups: readonly RevenueLeadLookup[] = [];
   protected readonly searchResults = signal<readonly RevenueGeneratingContract[]>([]);
   protected readonly totalResults = signal(0);
   protected readonly pageSize = signal(10);
@@ -39,10 +45,10 @@ export class Revenue implements OnInit {
 
   private assignDropdownOptions(response: ResponseLite): void {
     this.agencies = response.agencyLookupList;
-    this.divisions = response.divisionLookupList.map((division) => division.divisionName);
-    this.departments = response.departmentLookupList.map((department) => department.departmentName);
+    this.divisionLookups = response.divisionLookupList;
+    this.departmentLookups = response.departmentLookupList;
+    this.revenueLeadLookups = response.revenueLeadLookupList;
     this.rgcStatuses = response.rgcStatusLookupList.map((status) => status.rgcStatusName);
-    this.revenueLeads = response.revenueLeadLookupList.map((lead) => lead.name);
     this.changeDetector.markForCheck();
   }
 
@@ -55,7 +61,35 @@ export class Revenue implements OnInit {
 
   protected agencyChanged(agencyName: string): void {
     const selectedAgency = this.agencies.find((agency) => agency.agencyName === agencyName);
-    this.searchForm.controls.agencyId.setValue(selectedAgency?.agencyId ?? '');
+    const agencyId = selectedAgency?.agencyId ?? '';
+    this.searchForm.controls.agencyId.setValue(agencyId);
+    this.divisions = this.divisionLookups
+      .filter((division) => division.agencyId === agencyId && division.divisionName)
+      .map((division) => division.divisionName);
+    this.revenueLeads = this.revenueLeadLookups
+      .filter((lead) => lead.agencyName === agencyName && lead.name)
+      .map((lead) => lead.name);
+    this.departments = [];
+    this.searchForm.patchValue({
+      division: '',
+      department: '',
+      rgcStatus: '',
+      revenueLead: '',
+      beginDateOperator: 'After',
+      endDateOperator: 'After',
+      totalRevenueOperator: 'Equal to',
+    });
+  }
+
+  protected divisionChanged(divisionName: string): void {
+    const agencyId = this.searchForm.controls.agencyId.value;
+    const selectedDivision = this.divisionLookups.find(
+      (division) => division.agencyId === agencyId && division.divisionName === divisionName,
+    );
+    this.departments = this.departmentLookups
+      .filter((department) => department.divisionId === selectedDivision?.divisionId && department.departmentName)
+      .map((department) => department.departmentName);
+    this.searchForm.controls.department.reset('');
   }
 
   protected search(): void {
