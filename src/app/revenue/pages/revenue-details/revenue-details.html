@@ -1,0 +1,58 @@
+<main class="details-shell">
+  @if (contract(); as selectedContract) {
+    <header class="details-header">
+      <h1>Revenue Generating Contract Detail</h1>
+      <p>HHS or DFPS is the Performing Agency</p>
+      @if (isEditing()) {
+        <button class="edit-button" type="button" (click)="cancelEditing()">Cancel</button>
+      } @else {
+        <button class="edit-button" type="button" (click)="enableEditing()">Edit</button>
+      }
+    </header>
+
+    <form class="contract-card" [formGroup]="contractForm" aria-labelledby="contract-number">
+      <h2 id="contract-number">{{ selectedContract.rgcNumber }}</h2>
+      <dl class="contract-fields">
+        <div><dt [class.required]="isEditing()">Agency</dt><dd>@if (isEditing()) { <input type="text" formControlName="agency" /> } @else { {{ selectedContract.agency }} }</dd></div>
+        <div><dt [class.required]="isEditing()">Division</dt><dd>@if (isEditing()) { <input type="text" formControlName="division" /> } @else { {{ selectedContract.division }} }</dd></div>
+        <div><dt [class.required]="isEditing()">Department</dt><dd>@if (isEditing()) { <input type="text" formControlName="department" /> } @else { {{ selectedContract.department }} }</dd></div>
+        <div><dt [class.required]="isEditing()">Entity Name</dt><dd>@if (isEditing()) { <input type="text" formControlName="entityName" /> } @else { {{ selectedContract.entityName }} }</dd></div>
+        <div><dt>Federal ID</dt><dd>@if (isEditing()) { <input type="text" formControlName="federalId" /> } @else { }</dd></div>
+        <div><dt [class.required]="isEditing()">Revenue Lead</dt><dd>@if (isEditing()) { <input type="text" formControlName="revenueLead" /> } @else { {{ selectedContract.revenueLead }} }</dd></div>
+        <div><dt [class.required]="isEditing()">Begin Date</dt><dd>@if (isEditing()) { <span class="date-input"><input type="date" formControlName="beginDate" aria-label="Begin date" required /><span class="calendar-symbol" aria-hidden="true"></span></span> } @else { {{ selectedContract.beginDate | date: 'MM/dd/yyyy' }} }</dd></div>
+        <div><dt [class.required]="isEditing()">End Date</dt><dd>@if (isEditing()) { <span class="date-input"><input type="date" formControlName="endDate" aria-label="End date" required /><span class="calendar-symbol" aria-hidden="true"></span></span> } @else { {{ selectedContract.endDate | date: 'MM/dd/yyyy' }} }</dd></div>
+        <div><dt>RGC Status</dt><dd>@if (isEditing()) { <input type="text" formControlName="status" /> } @else { {{ selectedContract.status }} }</dd></div>
+        <div><dt [class.required]="isEditing()">Expected Revenue</dt><dd>@if (isEditing()) { <input type="text" formControlName="expectedRevenue" /> } @else { {{ selectedContract.expectedRevenue === null ? '$0.00' : ('$' + selectedContract.expectedRevenue.toFixed(2)) }} }</dd></div>
+        <div><dt [class.required]="isEditing()">Objective</dt><dd>@if (isEditing()) { <textarea formControlName="objective" rows="3"></textarea> } @else { {{ selectedContract.objective }} }</dd></div>
+        <div><dt>Comment</dt><dd>@if (isEditing()) { <textarea formControlName="comment" rows="3"></textarea> } @else { Not available }</dd></div>
+      </dl>
+      <footer class="contract-footer">
+        <div class="audit-field"><strong>Last Updated By</strong><span>Hhsadmin, Adminone</span></div>
+        <div class="audit-field"><strong>Last Updated Date</strong><span>08/22/2026 09:49</span></div>
+        <button class="documents-button" type="button" disabled>Download All Documents</button>
+      </footer>
+    </form>
+
+    <section class="detail-section documents-section" aria-labelledby="documents-heading">
+      <h2 id="documents-heading">Documents Uploaded</h2>
+      <div class="documents-row">
+        <div><strong>Document Type</strong><span>Contract</span></div>
+        <div><strong>Files Uploaded</strong><span></span></div>
+      </div>
+    </section>
+
+    <section class="detail-section address-section" aria-labelledby="address-heading">
+      <h2 id="address-heading">Revenue Address</h2>
+      <div class="address-row">
+        <div><strong>Address1</strong><span></span></div>
+        <div><strong>Address2</strong><span></span></div>
+      </div>
+    </section>
+  } @else {
+    <section class="not-found">
+      <h1>Revenue Generating Contract</h1>
+      <p>Contract not found.</p>
+      <a class="edit-button" [routerLink]="['/']">Back to Search</a>
+    </section>
+  }
+</main>
