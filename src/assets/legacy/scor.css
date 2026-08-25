@@ -1,0 +1,2728 @@
+.dropDown-mgmt-panel-title a {
+    display: block;
+}
+
+.modal-content {
+   width: 1000px;
+    position: fixed;
+    top: 30%;
+    left: 5%;
+    z-index: 1050;
+   /* width: 100%;
+    height: 80%;*/
+    margin-left: -10%;
+
+}
+
+.dropdownComment-modal-body {
+    position: relative;
+    padding: 15px;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.dropdown-table-layout {
+    table-layout: fixed;
+}
+
+.dropdown-td-width-50 {
+    width: 50px;
+}
+
+.dropdown-td-width-30 {
+    width: 30px;
+}
+
+.dropdown-td-width-20 {
+    width: 20px;
+}
+
+#dropdown-show-data {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#dropdown-show-data:hover {
+    overflow: visible;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+#dropdown-show-data:focus {
+    overflow: visible;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.dropdown-th-col20 {
+    width: 20px;
+}
+
+.dropdown-th-col15 {
+    width: 15px;
+}
+.dropdown-th-col35 {
+    width: 35px;
+}
+
+.dropdown-div-padding {
+    margin-bottom: 15px
+}
+
+.dropdown-div-padding-left-15px {
+    padding-left: 15px
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.contract-search-date-padding {
+    margin-top: 25px;
+}
+
+.contract-search-width-17 {
+    width: 17%;
+}
+
+.contract-search-width-18 {
+    width: 18%;
+}
+
+.contract-search-width-27 {
+    width: 27%;
+}
+
+.contract-search-width-14 {
+    width: 14%;
+}
+
+.contract-search-width-9 {
+    width: 9%;
+}
+
+.contract-search-width-74 {
+    width: 74px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.home-page-font {
+    font-family: verdana;
+    font-size: 11pt;
+}
+
+.org-dropDown-panel-title a {
+    display: block;
+}
+
+.orgDropDown-th-col20 {
+    width: 20px;
+}
+
+.orgDropDown-th-col15 {
+    width: 15px;
+}
+.orgDropDown-th-col35 {
+    width: 35px;
+}
+
+.orgDropDown-div-padding {
+    padding-left: 15px;
+    margin-top:8px;
+}
+
+.orgDropDown-top-padding {
+    margin-top: 15px;
+}
+.dropDown-mgmt-panel-title a {
+    display: block;
+}
+
+.modal-content {
+   width: 1000px;
+    position: fixed;
+    top: 30%;
+    left: 5%;
+    z-index: 1050;
+   /* width: 100%;
+    height: 80%;*/
+    margin-left: -10%;
+
+}
+
+.dropdownComment-modal-body {
+    position: relative;
+    padding: 15px;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.dropdown-table-layout {
+    table-layout: fixed;
+}
+
+.dropdown-td-width-50 {
+    width: 50px;
+}
+
+.dropdown-td-width-30 {
+    width: 30px;
+}
+
+.dropdown-td-width-20 {
+    width: 20px;
+}
+
+#dropdown-show-data {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#dropdown-show-data:hover {
+    overflow: visible;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+#dropdown-show-data:focus {
+    overflow: visible;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.dropdown-th-col20 {
+    width: 20px;
+}
+
+.dropdown-th-col15 {
+    width: 15px;
+}
+.dropdown-th-col35 {
+    width: 35px;
+}
+
+.purpose-div-padding {
+    margin-top: 8px
+}
+
+.dropdown-div-padding-left-15px {
+    padding-left: 15px
+}
+.inValidRecordsWarning {
+    color: #000000;
+    background-color: #FAFAD2;
+}
+
+.enter-deliverable-div {
+    overflow-x: scroll;
+    height: 600px;
+}
+
+.enter-deliverable-table-layout {
+    table-layout: fixed;
+}
+
+.enter-deliverable-message {
+    margin-bottom: 10px;
+    text-align: center;
+    color: #2c8554;
+}
+
+.enter-deliverable-panel-title a {
+    display: block;
+    padding: 10px 15px;
+    margin: -10px -15px;
+}
+
+.enter-deliverable-div-padding {
+    margin-bottom: 10px;
+}
+
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    color: grey;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+.contract-organization-padding {
+    margin-top: 25px;
+}
+.contract-organization-padding {
+    margin-top: 25px;
+}
+.role-permission-mgmt-width-10 {
+    width: 10%;
+}
+
+.role-permission-mgmt-width-75 {
+    width: 75%;
+}
+
+.role-permission-mgmt-width-15 {
+    width: 15%;
+}
+
+.role-permission-comment-box-width {
+    width: 100%;
+}
+
+.role-permission-comment-box-padding {
+    padding-bottom: 10px;
+}
+.document-search-select-box-width {
+    width: 49%;
+    height: 98px !important;
+    border: 1px solid #5B5B5C;
+}
+
+.document-search-txt-area-width {
+    width: 49%;
+    height: 97px;
+    border: 1px solid #5B5B5C;
+}
+
+.document-search-width-74 {
+    width: 74px;
+}
+
+.document-search-div-padding {
+    margin-top: 15px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+.risk-asmt-tpl-panel-title a {
+    display: block;
+}
+
+.risk-asmt-tpl-div-padding {
+    margin-top: 15px
+}
+
+.risk-asmt-tpl-tableheader-inner-row {
+    width: 10%;
+    border: 1px solid white;
+}
+
+.risk-asmt-tpl-table-input-box {
+    width: 30px;
+}
+
+.risk-asmt-tpl-risk-level-score-padding-left {
+    padding-left: 35px;
+}
+
+.risk-asmt-tpl-risk-level-score-7-padding-left {
+    padding-left: 18px;
+}
+
+.risk-asmt-tpl-comment-box-padding {
+    padding-bottom: 10px;
+}
+
+.risk-asmt-tpl-comment-box-width {
+    width: 100%;
+}
+
+#comment-show-data {
+    width: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+#comment-show-data:hover {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+    word-wrap: break-word;
+}
+
+#comment-show-data:focus {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+    word-wrap: break-word;
+}
+
+.contract-search-date-padding {
+    margin-top: 25px;
+}
+
+.contract-search-width-17 {
+    width: 17%;
+}
+
+.contract-search-width-18 {
+    width: 18%;
+}
+
+.contract-search-width-27 {
+    width: 27%;
+}
+
+.contract-search-width-14 {
+    width: 14%;
+}
+
+.contract-search-width-9 {
+    width: 9%;
+}
+
+.contract-search-width-74 {
+    width: 74px;
+}
+
+.risk-asmt-management-div-paginate-align {
+    padding-bottom: 1em;
+    text-align: right;
+}
+
+.risk-asmt-management-div-align-other-risk-delete {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: right;
+}
+
+.risk-asmt-management-div-align-other-risk {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.risk-asmt-management-div-paginate-select-style {
+    width: 70px;
+}
+
+.risk-asmt-management-paginate-footer-style {
+    text-align: center;
+}
+
+.risk-asmt-management-table-borderless td,
+.table-borderless th {
+    border: 0 !important;
+}
+
+.risk-asmt-management-tableheader-width4x {
+    width: 4%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.risk-asmt-management-tableheader-width13 {
+    width: 13%;
+    border: 1px solid white;
+}
+
+.risk-asmt-management-tableheader-width12 {
+    width: 12%;
+    text-align: center;
+    border: 1px solid white;
+}
+
+.risk-asmt-management-tableheader-width11 {
+    width: 11%;
+    border: 1px solid white;
+}
+
+.risk-asmt-management-tableheader-width9 {
+    width: 9%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.risk-asmt-management-tableheader-inner-row {
+    width: 12%;
+    border: 1px solid white;
+}
+
+.risk-asmt-management-table-legend-display {
+    align-content: right;
+    padding-left: 4em;
+}
+
+.risk-asmt-management-paddingleft-10px {
+    padding: 10px;
+}
+
+.risk-asmt-management-contract-table-style1 {
+    width: 12%;
+    border: 1px solid white;
+    text-align: center
+}
+
+.risk-asmt-management-contract-table-style2 {
+    width: 16%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.risk-asmt-management-contract-table-style3 {
+    width: 11%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.risk-asmt-management-padding-bottom-1m {
+    padding-bottom: 1em;
+}
+
+.risk-asmt-management-text-padding-7em {
+    align-content: right;
+    padding-left: 7em;
+}
+
+.risk-asmt-management-text-padding-6m {
+    padding-bottom: 6px;
+}
+
+.risk-asmt-management-text-padding-10m {
+    align-content: right;
+    padding-left: 10em;
+}
+
+.risk-range-box {
+    border-left: thin solid #337ab7;
+    border-right: thin solid #337ab7;
+    border-top: thin solid #337ab7;
+    border-bottom: thin solid #337ab7;
+    border-radius: 3px;
+}
+
+.risk-asmt-management-select-padding {
+    padding-left: 45px;
+}
+
+.risk-asmt-management-div-paginate-align {
+    padding-bottom: 1em;
+    text-align: right;
+}
+
+.risk-asmt-management-div-align-other-risk-delete {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: right;
+}
+
+.risk-asmt-management-div-align-other-risk {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.risk-asmt-management-div-paginate-select-style {
+    width: 70px;
+}
+
+.risk-asmt-management-paginate-footer-style {
+    text-align: center;
+}
+
+.risk-asmt-management-table-borderless td,
+.table-borderless th {
+    border: 0 !important;
+}
+
+.risk-asmt-management-tableheader-width4x {
+    width: 4%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.risk-asmt-management-tableheader-width13 {
+    width: 13%;
+    border: 1px solid white;
+}
+
+.risk-asmt-management-tableheader-width12 {
+    width: 12%;
+    text-align: center;
+    border: 1px solid white;
+}
+
+.risk-asmt-management-tableheader-width11 {
+    width: 11%;
+    border: 1px solid white;
+}
+
+.risk-asmt-management-tableheader-width9 {
+    width: 9%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.risk-asmt-management-tableheader-inner-row {
+    width: 12%;
+    border: 1px solid white;
+}
+
+.risk-asmt-management-table-legend-display {
+    align-content: right;
+    padding-left: 4em;
+}
+
+.risk-asmt-management-paddingleft-10px {
+    padding: 10px;
+}
+
+.risk-asmt-management-contract-table-style1 {
+    width: 12%;
+    border: 1px solid white;
+    text-align: center
+}
+
+.risk-asmt-management-contract-table-style2 {
+    width: 16%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.risk-asmt-management-contract-table-style3 {
+    width: 11%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.risk-asmt-management-padding-bottom-1m {
+    padding-bottom: 1em;
+}
+
+.risk-asmt-management-text-padding-7em {
+    align-content: right;
+    padding-left: 7em;
+}
+
+.risk-asmt-management-text-padding-6m {
+    padding-bottom: 6px;
+}
+
+.risk-asmt-management-text-padding-10m {
+    align-content: right;
+    padding-left: 10em;
+}
+
+.risk-range-box {
+    border-left: thin solid #337ab7;
+    border-right: thin solid #337ab7;
+    border-top: thin solid #337ab7;
+    border-bottom: thin solid #337ab7;
+    border-radius: 3px;
+}
+
+.risk-asmt-management-select-padding {
+    padding-left: 45px;
+}
+.tpo-riskasmt-div-paginate-align {
+    padding-bottom: 1em;
+    text-align: right;
+}
+
+.tpo-riskasmt-div-align-other-risk-delete {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: right;
+}
+
+.tpo-riskasmt-div-align-other-risk {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.tpo-riskasmt-div-paginate-select-style {
+    width: 70px;
+}
+
+.tpo-riskamt-paginate-footer-style {
+    text-align: center;
+}
+
+.contractor-riskasmt-table-borderless td,
+.table-borderless th {
+    border: 0 !important;
+}
+
+.tpo-riskasmt-tableheader-width4x {
+    width: 4%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.tpo-riskasmt-tableheader-width13 {
+    width: 13%;
+    border: 1px solid white;
+}
+
+.tpo-riskasmt-tableheader-width12 {
+    width: 12%;
+    text-align: center;
+    border: 1px solid white;
+}
+
+.tpo-riskasmt-tableheader-width11 {
+    width: 11%;
+    border: 1px solid white;
+}
+
+.tpo-riskasmt-tableheader-width9 {
+    width: 9%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.tpo-riskasmt-tableheader-inner-row {
+    width: 12%;
+    border: 1px solid white;
+}
+
+.tpo-riskasmt-table-legend-display {
+    align-content: right;
+    padding-left: 4em;
+}
+
+.tpo-riskasmt-paddingleft-10px {
+    padding: 10px;
+}
+
+.tpo-riskasmt-tpo-table-style1 {
+    width: 12%;
+    border: 1px solid white;
+    text-align: center
+}
+
+.tpo-riskasmt-tpo-table-style2 {
+    width: 16%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.tpo-riskasmt-tpo-table-style3 {
+    width: 11%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.tpo-riskasmt-padding-bottom-1m {
+    padding-bottom: 1em;
+}
+
+.tpo-riskasmt-text-padding-7em {
+    align-content: right;
+    padding-left: 7em;
+}
+
+.tpo-riskasmt-text-padding-6m {
+    padding-bottom: 6px;
+}
+
+.tpo-riskasmt-text-padding-10m {
+    align-content: right;
+    padding-left: 10em;
+}
+
+.risk-range-box {
+    border-left: thin solid #337ab7;
+    border-right: thin solid #337ab7;
+    border-top: thin solid #337ab7;
+    border-bottom: thin solid #337ab7;
+    border-radius: 3px;
+}
+
+.tpo-riskasmt-select-padding {
+    padding-left: 45px;
+}
+
+.tpo-risk-asmt-padding-top-15px {
+    padding-top: 15px;
+}
+
+.tpo-risk-factor-other-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.inValidRecordsWarning {
+    color: #000000;
+    background-color: #FAFAD2;
+}
+
+.tpo-enter-deliverable-div {
+    overflow-x: scroll;
+    height: 600px;
+}
+
+.tpo-enter-deliverable-table-layout {
+    table-layout: fixed;
+}
+
+.tpo-enter-deliverable-message {
+    margin-bottom: 10px;
+    text-align: center;
+    color: #2c8554;
+}
+
+.tpo-enter-deliverable-panel-title a {
+    display: block;
+    padding: 10px 15px;
+    margin: -10px -15px;
+}
+
+.tpo-enter-deliverable-div-padding {
+    margin-bottom: 10px;
+}
+
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    color: grey;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+.tpo-risk-asmt-tpl-panel-title a {
+    display: block;
+}
+
+.tpo-risk-asmt-tpl-div-padding {
+    margin-top: 15px
+}
+
+.tpo-risk-asmt-tpl-tableheader-inner-row {
+    width: 10%;
+    border: 1px solid white;
+}
+
+.tpo-risk-asmt-tpl-table-input-box {
+    width: 30px;
+}
+
+.tpo-risk-asmt-tpl-risk-level-score-padding-left {
+    padding-left: 35px;
+}
+
+.tpo-risk-asmt-tpl-risk-level-score-7-padding-left {
+    padding-left: 18px;
+}
+
+.tpo-risk-asmt-tpl-comment-box-padding {
+    padding-bottom: 10px;
+}
+
+.tpo-risk-asmt-tpl-comment-box-width {
+    width: 100%;
+}
+
+#comment-show-data {
+    width: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+#comment-show-data:hover {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+    word-wrap: break-word;
+}
+
+#comment-show-data:focus {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+    word-wrap: break-word;
+}
+
+.contract-adverse-action-tbl-width {
+    width: 160px;
+}
+
+.contract-adverse-action-tbl-width-date {
+    width: 100px;
+}
+
+.contract-adverse-action-dropdownwidth {
+    width: 65px;
+}
+
+.contract-adverse-action-css-form select.ng-invalid {
+    border-color: #cc3300;
+    border-width: 2px;
+}
+
+.contract-adverse-action-css-form input.ng-invalid {
+    border-color: #cc3300;
+    border-width: 2px;
+}
+
+.contract-adverse-action-css-form textarea.ng-invalid {
+    border-color: #cc3300;
+    border-width: 2px;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+
+.contract-contact-div-eq-height {
+    height: 250px;
+    word-wrap: break-word;
+}
+
+.contract-contact-div-padding-top {
+    text-align: right;
+}
+
+.contract-contact-div-padding-top15 {
+    padding-top: 35px;
+}
+
+.contract-contact-table-td-label-align {
+    text-align: right;
+    padding-left: 1em;
+}
+
+.contract-contact-table-td-input-style {
+    padding-bottom: 1em;
+}
+
+.contract-contact-div-width {
+    width: 57%;
+}
+
+.contract-contact-td-center-align {
+    text-align: center;
+}
+
+
+.contract-contact-font {
+    font-family: verdana;
+    font-size: 11pt;
+}
+
+.contract-contact-font10 {
+    font-family: verdana;
+    font-size: 10pt;
+}
+
+.contract-contact-div-eq-height300 {
+    height: 400px;
+}
+.contract-contact-td-padding-top{
+	padding-bottom:5px;
+}
+
+.contract-contact-panel-title a {
+    display: block;
+    padding: 10px 15px;
+    margin: -10px -15px;
+}
+.contract-contact-div-padding {
+    margin-top: 15px
+}
+.contact-div-padding {
+    padding-left: 0px;
+}
+
+.contract-deliverables-top-padding {
+    padding-top:10px
+}
+
+.contract-deliverables-bottom-padding {
+    padding-bottom:5px
+}
+
+.contract-deliverables-div-padding {
+    margin-top: 15px
+}
+
+.contract-deliverables-error-wrapper {
+    display:inline-block;
+    text-align: left;
+    color:#cc3300;
+    padding-left:1px
+}
+
+.contract-deliverables-div-padding {
+    margin-top: 15px
+}
+.contract-deliverables-dropdownwidth {
+    width: 65px;
+    padding: 6px 6px;
+}
+
+.contract-document-dropdownwidth {
+    width: 65px;
+    padding: 6px 6px;
+}
+
+.contract-search-dropdownwidth {
+    width: 80px;
+}
+
+.deliverable-panel-title a {
+    display: block;
+    padding: 10px 15px;
+    margin: -10px -15px;
+}
+#comment-show-data {
+    width: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+#comment-show-data:hover {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+    word-wrap: break-word;
+}
+
+#comment-show-data:focus {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+    word-wrap: break-word;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+
+.county-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.county-li {
+    float: left;
+    width: 20%;
+}
+
+.county-div-padding {
+    margin-left: 0px
+}
+
+.county-div-padding-right-20px {
+	padding-right: 20px;
+}
+
+.county-div-padding-top-5px {
+	padding-top: 5px;
+}
+
+.county-div-padding-bottom-10px {
+	padding-bottom:10px;
+}
+
+.label-non-bold {
+	font-weight: normal !important;
+}
+.contract-detail-div-padding {
+    margin-top: 15px
+}
+
+.control-detail-text-box {
+    width: 100%;
+}
+
+.contract-detail-panel-title a {
+    display: block;
+    padding: 10px 15px;
+    margin: -10px -15px;
+    background-color: #22599C;
+}
+
+#control-detail-show-data {
+    width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#control-detail-show-data:hover {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+}
+
+#control-detail-show-data:focus {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+}
+
+.contract-detail-message {
+    margin-top: 15px;
+    text-align: center;
+    color: #2c8554;
+}
+
+.contract-detail-message-padding {
+    margin-bottom: 15px
+}
+
+.warning-message {
+    text-align: right;
+    color: #cc3300;
+    margin-top: 10px;
+    margin-right: 100px;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+
+.message-padding {
+    color: #cc3300;
+    margin-bottom: 15px
+}
+
+
+
+.close-out-error-wrapper {
+    display:inline-block;
+    text-align: left;
+    color:#cc3300;
+    padding-left:1px
+}
+
+.contract-closeout-info-panel-title a {
+    display: block;
+    padding: 10px 15px;
+    margin: -10px -15px;
+    background-color: #22599C;
+}
+
+.close-out-message-padding {
+    margin-bottom: 15px
+}
+
+.close-out-form-message-padding {
+    padding-top: 8px;
+}
+
+.with-breaks {
+    white-space: pre-wrap;
+    color: red;
+    text-align: center;
+}
+
+.message-padding {
+	color:#cc3300;
+	margin-bottom: 15px
+}
+
+.close-out-padding {
+    padding-left: 0px
+}
+
+#closeout-form-show-data {
+    width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.close-out-form-padding {
+    padding-left: 10px
+}
+
+#ContractCloseoutFormSection .row {
+	padding-top: 5px;
+}
+
+.custom-select {
+	display: inline-block;
+  	vertical-align: top;
+  	margin: 0;  
+	margin-right: 0;
+  	margin-left: 0;
+  	width: 300px; 
+  	height: 87px; 
+  	border: 1px solid #5B5B5C;          	
+}
+
+.custom-text-area {
+	display: inline-block;
+  	vertical-align: top;
+  	margin: 0;          	
+	margin-right: 0;
+  	margin-left: 0;
+  	width: 300px; 
+  	height: 87px; 
+  	border: 1px solid #5B5B5C;
+}
+
+.contract-library-div-padding {
+    margin-top: 15px
+}
+
+.contract-library-bottom-padding {
+    margin-bottom: 10px
+}
+
+.contract-library-left-padding {
+    padding-left: 15px;
+}
+
+.contract-library-message {
+    margin-bottom: 15px;
+    text-align: center;
+    color: #2c8554;
+}
+
+.contract-library-panel-title a {
+    display: block;
+}
+
+.contract-library-width {
+    width: auto!important;
+}
+
+.contract-history-btn {
+	font-size:12px;
+}
+
+.contract-history-bottom-padding {
+	margin-bottom: 10px
+}
+
+.contract-history-left-padding {
+	padding-left: 15px;
+}
+
+.contract-history-warning-message {    
+	color: #cc3300;
+	margin-top: 10px;
+	margin-right: 100px;
+}
+
+.contract-history-padding {
+	padding-top: 5px;
+}
+
+.contract-riskasmt-div-paginate-align {
+    padding-bottom: 1em;
+    text-align: right;
+}
+
+.contract-riskasmt-div-align-other-risk-delete {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: right;
+}
+
+.contract-riskasmt-div-align-other-risk {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.contract-riskasmt-div-paginate-select-style {
+    width: 70px;
+}
+
+.contract-riskamt-paginate-footer-style {
+    text-align: center;
+}
+
+.contractor-riskasmt-table-borderless td,
+.table-borderless th {
+    border: 0 !important;
+}
+
+.contract-riskasmt-tableheader-width4x {
+    width: 4%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.contract-riskasmt-tableheader-width13 {
+    width: 13%;
+    border: 1px solid white;
+}
+
+.contract-riskasmt-tableheader-width12 {
+    width: 12%;
+    text-align: center;
+    border: 1px solid white;
+}
+
+.contract-riskasmt-tableheader-width11 {
+    width: 11%;
+    border: 1px solid white;
+}
+
+.contract-riskasmt-tableheader-width9 {
+    width: 9%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.contract-riskasmt-tableheader-inner-row {
+    width: 12%;
+    border: 1px solid white;
+}
+
+.contract-riskasmt-table-legend-display {
+    align-content: right;
+    padding-left: 4em;
+}
+
+.contract-riskasmt-paddingleft-10px {
+    padding: 10px;
+}
+
+.contract-riskasmt-contract-table-style1 {
+    width: 12%;
+    border: 1px solid white;
+    text-align: center
+}
+
+.contract-riskasmt-contract-table-style2 {
+    width: 16%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.contract-riskasmt-contract-table-style3 {
+    width: 11%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.contract-riskasmt-padding-bottom-1m {
+    padding-bottom: 1em;
+}
+
+.contract-riskasmt-text-padding-7em {
+    align-content: right;
+    padding-left: 7em;
+}
+
+.contract-riskasmt-text-padding-6m {
+    padding-bottom: 6px;
+}
+
+.contract-riskasmt-text-padding-10m {
+    align-content: right;
+    padding-left: 10em;
+}
+
+.risk-range-box {
+    border-left: thin solid #337ab7;
+    border-right: thin solid #337ab7;
+    border-top: thin solid #337ab7;
+    border-bottom: thin solid #337ab7;
+    border-radius: 3px;
+}
+
+.contract-riskasmt-select-padding {
+    padding-left: 45px;
+}
+
+.contract-risk-asmt-padding-top-15px {
+    padding-top: 15px;
+}
+
+.contract-risk-factor-other-list {
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+.st-sort-ascent:before {
+    content: '\25B2';
+}
+
+.st-sort-descent:before {
+    content: '\25BC';
+}
+
+.contract-search-div-padding {
+    margin-top: 15px;
+}
+
+.contract-search-date-padding {
+    margin-top: 25px;
+}
+
+.contract-search-width-17 {
+    width: 17%;
+}
+
+.contract-search-width-18 {
+    width: 18%;
+}
+
+.contract-search-width-27 {
+    width: 27%;
+}
+
+.contract-search-width-14 {
+    width: 14%;
+}
+
+.contract-search-width-9 {
+    width: 9%;
+}
+
+.contract-search-width-74 {
+    width: 74px;
+}
+
+.document-library-div-padding {
+    margin-top: 15px
+}
+
+.document-library-bottom-padding {
+    padding-bottom: 15px
+}
+
+.document-library-top-padding {
+    padding-top: 15px
+}
+
+.document-library-message {
+    margin-top: 15px;
+    text-align: center;
+    color: #2c8554;
+}
+
+.document-library-message-padding {
+    margin-bottom: 15px
+}
+
+.document-library-left-padding {
+    padding-left: 15px;
+}
+
+.indirect-costrate-div-comment {
+    word-wrap: break-word; 
+    width:100%
+}
+
+.indirectCostRate-error-wrapper {
+    display:inline-block;
+    text-align: left;
+    color:#cc3300;
+    padding-left:1px
+}
+.contractor-detail-table-borderless td,
+.table-borderless th {
+    border: 0 !important;
+}
+
+.contractor-detail-paddingRec {
+    padding-top: 25px;
+}
+
+.contractor-detail-div-padding {
+    margin-top: 15px
+}
+.contractor-ownership-align-center {
+    text-align: center;
+}
+.button-size {
+     width: 100px;
+     height: 33px;
+}
+
+.single-audit.table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.single-audit-filesattached-headerlabel {
+    color: #fff;
+    background-color: #aecbe8;
+    border-color: #2e6da4;
+}
+
+.single-audit-form-control-input {
+    display: block;
+    width: 75%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.single-audit-table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.single-audit-table > thead > tr > th,
+.single-audit-table > tbody > tr > th,
+.single-audit-table > tfoot > tr > th,
+.single-audit-table > thead > tr > td,
+.single-audit-table > tbody > tr > td,
+.single-audit-table > tfoot > tr > td {
+    padding: 5px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 0px solid #dddddd;
+    width: 25%;
+}
+
+.single-audit-table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dddddd;
+}
+
+.single-audit-div-padding {
+    margin-top: 15px
+}
+
+.single-audit-div-comment {
+    word-wrap: break-word; 
+    width:100%
+}
+
+.single-audit-div-paginate-align {
+    padding-bottom: .1em;
+    text-align: right;
+}
+
+.singleaudit-detail-message {
+    margin-top: 15px;
+    text-align: center;
+    color: #3CB371;
+}
+
+.singleaudit-detail-message-padding {
+    margin-bottom: 15px
+}
+
+.singleaudit-detail-top-padding {
+    padding-top:10px
+}
+
+.singleaudit-detail-bottom-padding {
+    padding-bottom:5px
+}
+
+.singleaudit-error-wrapper {
+    display:inline-block;
+    text-align: left;
+    color:#cc3300;
+    padding-left:1px
+}
+.dropDownWidth {
+    width: 70px;
+}
+
+fieldset {
+    border-radius: 0;
+    background: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    position: relative;
+    border: none;
+}
+
+
+.monitoring-history-bottom-padding {
+    padding-bottom:5px
+}
+
+.monitoring-history-top-padding {
+    padding-top:10px
+}
+span:focus {
+    outline: none;
+    border: 0;
+ }
+span:focus {
+    outline: none;
+    border: 0;
+ }
+.workload-div-padding {
+    padding-left: 16px;
+    padding-top: 15px;
+}
+
+.workload-contract-padding {
+    padding-right: 125px;
+    padding-bottom:5px;
+}
+
+.workload-top-padding {
+	padding-top:25px;
+}
+
+.workload-alerts-padding {
+	padding-right:25px;
+	padding-bottom:10px;
+}
+.tasklist-select-box-width {
+    width: 49%;
+    height:98px !important;
+    border: 1px solid #5B5B5C;
+}
+
+.tasklist-txt-area-width {
+    width: 49%;
+    height: 97px;
+    border: 1px solid #5B5B5C;
+}
+
+.contract-manager-css{
+	width: 49%;
+	height:345px !important;
+    border: 1px solid #5B5B5C;
+}
+
+.tasklist-tableheader-width4x {
+    width: 15%;
+    border: 1px solid white;    
+}
+
+.tasklist-tableheader-width12 {
+    width: 12%;
+    text-align: center;
+    border: 1px solid white;
+}
+
+.tasklist-tableheader-inner-row {
+    width: 10%;
+    border: 1px solid white;
+}
+
+
+.workload-select-box-width {
+    width: 49%;
+    height:98px !important;
+    border: 1px solid #5B5B5C;
+}
+
+.workload-txt-area-width {
+    width: 49%;
+    height: 97px;
+    border: 1px solid #5B5B5C;
+}
+
+.contract-manager-css{
+	width: 49%;
+	height:345px !important;
+    border: 1px solid #5B5B5C;
+}
+
+.workload-tableheader-width4x {
+    width: 15%;
+    border: 1px solid white;    
+}
+
+.workload-tableheader-width12 {
+    width: 12%;
+    text-align: center;
+    border: 1px solid white;
+}
+
+.workload-tableheader-inner-row {
+    width: 10%;
+    border: 1px solid white;
+}
+
+
+span:focus {
+    outline: none;
+    border: 0;
+ }
+
+.blue-background {
+    background-color: #b2d9ef;
+    /* Use any shade of blue you prefer. */
+    color: black;
+    text-align: center;
+    /* Assuming you want the text in white color. Adjust as necessary. */
+}
+
+.header-title {
+    color: white;
+    background-color: blue;
+    text-align: center;
+}
+.st-sort-ascent:before {
+    content: '\25B2';
+}
+
+.st-sort-descent:before {
+    content: '\25BC';
+}
+
+.procurement-search-div-padding {
+    margin-top: 15px;
+}
+
+.procurement-search-width-74 {
+    width: 74px;
+}
+
+.procurement-detail-div-padding {
+    margin-top: 15px
+}
+
+.procurement-detail-bottom-padding {
+    margin-bottom: 10px
+}
+
+.procurement-detail-left-padding {
+    padding-left: 15px;
+}
+
+.procurement-detail-message {
+    margin-bottom: 15px;
+    text-align: center;
+    color: #2c8554;
+}
+
+.procurement-detail-panel-title a {
+    display: block;
+}
+
+.procurement-detail-width-70 {
+    width: 70px;
+}
+
+#procurement-detail-show-data {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#procurement-detail-show-data:hover {
+    overflow: visible;
+    white-space: normal;
+}
+
+#procurement-detail-show-data:focus {
+    overflow: visible;
+    white-space: normal;
+}
+
+.rgc-detail-text-box {
+    width: 350px;
+}
+
+.rgc-detail-message-padding {
+    margin-bottom: 15px
+}
+
+.rgc-error-wrapper {
+    display:inline-block;
+    text-align: left;
+    color:#cc3300;
+    padding-left:1px
+}
+.rgc-search-div-padding {
+    margin-top: 15px;
+}
+
+.rgc-search-date-padding {
+    margin-top: 25px;
+}
+.close-out-error-wrapper {
+    display:inline-block;
+    text-align: left;
+    color:#cc3300;
+    padding-left:1px
+}
+
+.tpo-closeout-info-panel-title a {
+    display: block;
+    padding: 10px 15px;
+    margin: -10px -15px;
+    background-color: #22599C;
+}
+
+.close-out-message-padding {
+    margin-bottom: 15px
+}
+
+.close-out-form-message-padding {
+    padding-top: 8px;
+}
+
+.with-breaks {
+    white-space: pre-wrap;
+    color: red;
+    text-align: center;
+}
+
+.message-padding {
+    color:#cc3300;
+    margin-bottom: 15px
+}
+
+.close-out-padding {
+    padding-left: 0px
+}
+
+#closeout-form-show-data {
+    width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.close-out-form-padding {
+    padding-left: 10px
+}
+
+#TpoCloseoutFormSection .row {
+    padding-top: 5px;
+}
+
+.tpo-contact-div-eq-height {
+    height: 250px;
+    word-wrap: break-word;
+}
+
+.tpo-contact-div-padding-top {
+    text-align: right;
+}
+
+.tpo-contact-div-padding-top15 {
+    padding-top: 35px;
+}
+
+.tpo-contact-table-td-label-align {
+    text-align: right;
+    padding-left: 1em;
+}
+
+.tpo-contact-table-td-input-style {
+    padding-bottom: 1em;
+}
+
+.tpo-contact-div-width {
+    width: 57%;
+}
+
+.tpo-contact-td-center-align {
+    text-align: center;
+}
+
+
+.tpo-contact-font {
+    font-family: verdana;
+    font-size: 11pt;
+}
+
+.tpo-contact-font10 {
+    font-family: verdana;
+    font-size: 10pt;
+}
+
+.tpo-contact-div-eq-height300 {
+    height: 400px;
+}
+.tpo-contact-td-padding-top{
+    padding-bottom:5px;
+}
+
+.tpo-contact-panel-title a {
+    display: block;
+    padding: 10px 15px;
+    margin: -10px -15px;
+}
+.tpo-contact-div-padding {
+    margin-top: 15px
+}
+.contact-div-padding {
+    padding-left: 0px;
+}
+
+.tpo-adverse-action-tbl-width {
+    width: 160px;
+}
+
+.tpo-adverse-action-tbl-width-date {
+    width: 100px;
+}
+
+.tpo-adverse-action-dropdownwidth {
+    width: 65px;
+}
+
+.tpo-adverse-action-css-form select.ng-invalid {
+    border-color: #cc3300;
+    border-width: 2px;
+}
+
+.tpo-adverse-action-css-form input.ng-invalid {
+    border-color: #cc3300;
+    border-width: 2px;
+}
+
+.tpo-adverse-action-css-form textarea.ng-invalid {
+    border-color: #cc3300;
+    border-width: 2px;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+
+.tpo-deliverables-top-padding {
+    padding-top:10px
+}
+
+.tpo-deliverables-bottom-padding {
+    padding-bottom:5px
+}
+
+.tpo-deliverables-div-padding {
+    margin-top: 15px
+}
+
+.tpo-deliverables-error-wrapper {
+    display:inline-block;
+    text-align: left;
+    color:#cc3300;
+    padding-left:1px
+}
+
+.tpo-deliverables-div-padding {
+    margin-top: 15px
+}
+.tpo-deliverables-dropdownwidth {
+    width: 65px;
+    padding: 6px 6px;
+}
+
+.tpo-document-dropdownwidth {
+    width: 65px;
+    padding: 6px 6px;
+}
+
+.tpo-search-dropdownwidth {
+    width: 80px;
+}
+
+.deliverable-panel-title a {
+    display: block;
+    padding: 10px 15px;
+    margin: -10px -15px;
+}
+#comment-show-data {
+    width: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+#comment-show-data:hover {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+    word-wrap: break-word;
+}
+
+#comment-show-data:focus {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+    word-wrap: break-word;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+
+.tpo-library-div-padding {
+    margin-top: 15px
+}
+
+.tpo-library-bottom-padding {
+    margin-bottom: 10px
+}
+
+.tpo-library-left-padding {
+    padding-left: 15px;
+}
+
+.tpo-library-message {
+    margin-bottom: 15px;
+    text-align: center;
+    color: #2c8554;
+}
+
+.tpo-library-panel-title a {
+    display: block;
+}
+
+.tpo-detail-div-padding {
+    margin-top: 15px
+}
+
+.control-detail-text-box {
+    width: 100%;
+}
+
+.tpo-detail-panel-title a {
+    display: block;
+    padding: 10px 15px;
+    margin: -10px -15px;
+    background-color: #22599C;
+}
+
+#control-detail-show-data {
+    width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#control-detail-show-data:hover {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+}
+
+#control-detail-show-data:focus {
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+}
+
+.tpo-detail-message {
+    margin-top: 15px;
+    text-align: center;
+    color: #2c8554;
+}
+
+.tpo-detail-message-padding {
+    margin-bottom: 15px
+}
+
+.warning-message {
+    text-align: right;
+    color: #cc3300;
+    margin-top: 10px;
+    margin-right: 100px;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+
+.message-padding {
+    color: #cc3300;
+    margin-bottom: 15px
+}
+
+
+
+.tpo-history-btn {
+    font-size:12px;
+}
+
+.tpo-history-bottom-padding {
+    margin-bottom: 10px
+}
+
+.tpo-history-left-padding {
+    padding-left: 15px;
+}
+
+.tpo-history-warning-message {
+    color: #cc3300;
+    margin-top: 10px;
+    margin-right: 100px;
+}
+
+.tpo-history-padding {
+    padding-top: 5px;
+}
+
+.tpo-riskasmt-div-paginate-align {
+    padding-bottom: 1em;
+    text-align: right;
+}
+
+.tpo-riskasmt-div-align-other-risk-delete {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: right;
+}
+
+.tpo-riskasmt-div-align-other-risk {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.tpo-riskasmt-div-paginate-select-style {
+    width: 70px;
+}
+
+.tpo-riskamt-paginate-footer-style {
+    text-align: center;
+}
+
+.contractor-riskasmt-table-borderless td,
+.table-borderless th {
+    border: 0 !important;
+}
+
+.tpo-riskasmt-tableheader-width4x {
+    width: 4%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.tpo-riskasmt-tableheader-width13 {
+    width: 13%;
+    border: 1px solid white;
+}
+
+.tpo-riskasmt-tableheader-width12 {
+    width: 12%;
+    text-align: center;
+    border: 1px solid white;
+}
+
+.tpo-riskasmt-tableheader-width11 {
+    width: 11%;
+    border: 1px solid white;
+}
+
+.tpo-riskasmt-tableheader-width9 {
+    width: 9%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.tpo-riskasmt-tableheader-inner-row {
+    width: 12%;
+    border: 1px solid white;
+}
+
+.tpo-riskasmt-table-legend-display {
+    align-content: right;
+    padding-left: 4em;
+}
+
+.tpo-riskasmt-paddingleft-10px {
+    padding: 10px;
+}
+
+.tpo-riskasmt-tpo-table-style1 {
+    width: 12%;
+    border: 1px solid white;
+    text-align: center
+}
+
+.tpo-riskasmt-tpo-table-style2 {
+    width: 16%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.tpo-riskasmt-tpo-table-style3 {
+    width: 11%;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.tpo-riskasmt-padding-bottom-1m {
+    padding-bottom: 1em;
+}
+
+.tpo-riskasmt-text-padding-7em {
+    align-content: right;
+    padding-left: 7em;
+}
+
+.tpo-riskasmt-text-padding-6m {
+    padding-bottom: 6px;
+}
+
+.tpo-riskasmt-text-padding-10m {
+    align-content: right;
+    padding-left: 10em;
+}
+
+.risk-range-box {
+    border-left: thin solid #337ab7;
+    border-right: thin solid #337ab7;
+    border-top: thin solid #337ab7;
+    border-bottom: thin solid #337ab7;
+    border-radius: 3px;
+}
+
+.tpo-riskasmt-select-padding {
+    padding-left: 45px;
+}
+
+.tpo-risk-asmt-padding-top-15px {
+    padding-top: 15px;
+}
+
+.tpo-risk-factor-other-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.tpo-search-div-padding {
+    margin-top: 15px;
+}
+
+.tpo-search-date-padding {
+    margin-top: 25px;
+}
+
+.tpo-search-width-17 {
+    width: 17%;
+}
+
+.tpo-search-width-18 {
+    width: 18%;
+}
+
+.tpo-search-width-27 {
+    width: 27%;
+}
+
+.tpo-search-width-14 {
+    width: 14%;
+}
+
+.tpo-search-width-9 {
+    width: 9%;
+}
+
+.tpo-search-width-74 {
+    width: 74px;
+}
+.contract-alerts-div-padding {
+    margin-top: 15px
+}
+
+.contract-alerts-padding {
+	margin-bottom: 0px
+}
+.checklist-supervisor-response-div-padding {
+    margin-top: 15px
+}
+
+.checklist-supervisor-response-padding {
+	margin-bottom: 0px
+}
+.new-contract-div-padding {
+    margin-top: 15px
+}
+
+.new-contract-padding {
+	margin-bottom: 0px
+}
+.contract-closeout-cm-div-padding {
+    margin-top: 15px
+}
+
+.contract-closeout-cm-padding {
+	margin-bottom: 0px
+}
+.new-contract-amendment-div-padding {
+    margin-top: 15px
+}
+
+.new-contract-amendment-padding {
+	margin-bottom: 0px
+}
+.new-tpo-div-padding {
+    margin-top: 15px
+}
+
+.new-tpo-padding {
+    margin-bottom: 0px
+}
+.tpo-closeout-email-notification-div-padding {
+    margin-top: 15px
+}
+
+.tpo-closeout-email-notification-padding {
+	margin-bottom: 0px
+}
+.past-due-deliverables-div-padding {
+    margin-top: 15px
+}
+
+
+.tpo-past-due-deliverables-div-padding {
+    margin-top: 15px
+}
+
+.tpo-new-change-order-div-padding {
+    margin-top: 15px
+}
+
+.tpo-new-change-order-padding {
+    margin-bottom: 0px
+}
+
+.padding-top-1em {
+    padding-top:1em;
+}
+
+.padding-top-2em {
+    padding-top: 2em;
+}
+
+.monitoring-event-top-padding {
+    padding-top:10px
+}
+
+.monitoring-event-bottom-padding {
+    padding-bottom:5px
+}
+
+#monitoring-event-show-data {
+    width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#monitoring-event-show-data:hover {
+    overflow: visible;
+    white-space: normal;
+    width: 350px;
+}
+
+#monitoring-event-show-data:focus{
+    overflow: visible;
+    white-space: normal;
+    width: 350px;
+}
+.monitoring-results-div-padding {
+    margin-top: 15px
+}
+
+.monitoring-results-bottom-padding {
+    margin-bottom: 15px
+}
+
+.monitoring-results-padding {
+    padding-left: 0px;
+}
+
+.questioned-costs-div-padding {
+    margin-top: 15px
+}
+
+.questioned-costs-bottom-padding {
+    margin-bottom: 15px
+}
+
+.questioned-costs-padding {
+    padding-left: 0px
+}
+
+.mb-3 {
+	margin-bottom: 3em;
+}
+.active-tableheader-border {
+    text-align: center;
+    border: 1px solid white;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis line,
+.axis path {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.axis--x path {
+    display: none;
+}
+
+.path-line {
+    fill: none;
+    stroke: yellow;
+    stroke-width: 1.5px;
+}
+
+.selected {
+    stroke: #333;
+    stroke-width: 2;
+}
+
+.layer {
+    font-family: sans-serif;
+    font-weight: bold;
+}
+.monthly-new-div-padding {
+    margin-top: 15px;
+}
+
+.monthly-new-padding {
+    padding-top: 25px;
+}
+
+.new-tableheader-border{
+	text-align: center;
+    border: 1px solid white;
+}
+span:focus {
+    outline: none;
+    border: 0;
+}
+span:focus {
+    outline: none;
+    border: 0;
+ }
+span:focus {
+    outline: none;
+    border: 0;
+ }
+span:focus {
+    outline: none;
+    border: 0;
+ }
+span:focus {
+    outline: none;
+    border: 0;
+}
+span:focus {
+    outline: none;
+    border: 0;
+}
+.template-tableheader-width5 {
+    width: 5%;
+}
+
+.template-tableheader-width6 {
+    width: 6%;
+}
+
+.template-tableheader-width11 {
+    width: 11%;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.template-tableheader-width8 {
+    width: 8%;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.template-tableheader-width7 {
+    width: 7%;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.template-tableheader-width9 {
+    width: 9%;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+
+span:focus {
+    outline: none;
+    border: 0;
+}
+span:focus {
+    outline: none;
+    border: 0;
+ }
+span:focus {
+    outline: none;
+    border: 0;
+ }
+span:focus {
+    outline: none;
+    border: 0;
+ }
+.padding-top-1em {
+    padding-top:1em;
+}
+
+.padding-top-2em {
+    padding-top: 2em;
+}
+
+.tpo-monitoring-event-top-padding {
+    padding-top:10px
+}
+
+.tpo-monitoring-event-bottom-padding {
+    padding-bottom:5px
+}
+
+#tpo-monitoring-event-show-data {
+    width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#tpo-monitoring-event-show-data:hover {
+    overflow: visible;
+    white-space: normal;
+    width: 350px;
+}
+
+#tpo-monitoring-event-show-data:focus{
+    overflow: visible;
+    white-space: normal;
+    width: 350px;
+}
+.tpo-monitoring-results-div-padding {
+    margin-top: 15px
+}
+
+.tpo-monitoring-results-bottom-padding {
+    margin-bottom: 15px
+}
+
+.tpo-monitoring-results-padding {
+    padding-left: 0px;
+}
+
+.tpo-questioned-costs-div-padding {
+    margin-top: 15px
+}
+
+.tpo-questioned-costs-bottom-padding {
+    margin-bottom: 15px
+}
+
+.tpo-questioned-costs-padding {
+    padding-left: 0px
+}
+
+.container {
+    background-color: #ffffff;
+}
+
+#headerbar {
+    height: 50px;
+    background-color: #E4ECF5;
+    text-align: right;
+    padding-right: 2em;
+    padding-top: 0.65em;
+    padding-bottom: 0.60em;
+}
+
+.navigation-btn {
+    border-radius: 12px;
+    background-color: #ffffff;
+    border: none;
+    color: #0073C5;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#headerlogo {
+    background: url(/images/logo-banner.png) no-repeat top left;
+    height: 100px;
+}
+
+.navbar {
+    border: none;
+    background: #ffffff;
+}
+
+#holder ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#holder .navtabmainmenu li a {
+    text-decoration: none;
+    float: none;
+    margin-right: 1px;
+    font-family: Verdana;
+    font-size: 10.5pt;
+    font-weight: bold;
+    color: #ffffff;
+    border: 1px solid #000;
+    border-bottom: none;
+    padding: 6px;
+    text-align: center;
+    display: block;
+    /*background: #0070AC;*/
+    background: #22599C;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#holder .tab-content li {
+    border-left: solid 1px black;
+    line-height: 5px;
+}
+
+#holder .tab-content li:first-child {
+    border-left: none;
+}
+
+#holder .navtabmainmenu > li.active > a {
+    background-color: #b2d9ef;
+    color: #000;
+}
+
+#holder .tab-content ul {
+    padding-top: 6px;
+    border-style: none;
+}
+
+#holder .tab-content li a {
+    text-decoration: none;
+    float: none;
+    margin-right: 1px;
+    font-family: Verdana;
+    font-size: 10.5pt;
+    font-weight: bold;
+    color: #000;
+    padding: 3px;
+    text-align: center;
+    display: block;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border: none;
+}
+
+#holder .tabcontentsubmenu > .active {
+    background-color: #b2d9ef;
+    color: inherit;
+}
+
+#holder .tabcontentsecondlevelsubmenu > .active {
+    background-color: #cddcee;
+    color: inherit;
+}
+
+#holder .navtabssubmenu > li.active > a,
+#holder .navtabssubmenu > li > a:hover,
+#holder .navtabssubmenu > li > a:focus {
+    background-color: #ffffff;
+    color: #000;
+}
+
+.contract-header-width-15 {
+    width: 15%;
+}
+
+.contract-header-width-7 {
+    width: 7%;
+}
+
+.contract-header-width-22 {
+    width: 22%;
+}
+
+.contract-header-width-16 {
+    width: 16%;
+}
+
+.contract-header-width-13 {
+    width: 13%;
+}
+
+.contract-header-width-8 {
+    width: 8%;
+}
+.contract-header-width-10 {
+    width: 10%;
+}
+.contract-header-width-9 {
+    width: 9%;
+}

@@ -3,6 +3,7 @@
   min-height: 100dvh;
   color: #202020;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
 }
 
 .page-shell { min-height: 100dvh; padding: 17px 12px 28px; box-sizing: border-box; background: #fff; }
@@ -12,7 +13,7 @@ h1 { margin: 0; color: #1e1e1e; font-size: 18px; font-weight: 700; line-height: 
 .button-primary { background: #24619c; }
 .button:hover, .button:focus-visible { background: #174c83; }
 .add-button { display: block; margin: 5px 0 0 auto; }
-.search-form { max-width: 1240px; margin: 0 auto; padding: 9px 10px 8px; border: 1px solid #7493b0; border-radius: 2px; box-sizing: border-box; }
+.search-form { max-width: 1240px; margin: 0 auto 40px; padding: 9px 10px 8px; border: 1px solid #7493b0; border-radius: 2px; box-sizing: border-box; }
 .three-column-fields, .two-column-fields { display: grid; column-gap: 19px; row-gap: 8px; }
 .three-column-fields { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .two-column-fields { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 8px; }
@@ -35,7 +36,7 @@ input:focus, select:focus { border-color: #24619c; outline: 2px solid #b9d5ef; o
 .search-status { margin: 10px 0 0; color: #24619c; font-size: 13px; text-align: center; }
 
 @media (max-width: 760px) {
-  .page-shell { padding: 17px 12px 28px; }
+  .page-shell { padding: 17px 40px 28px; }
   .page-header { align-items: flex-start; gap: 12px; }
   h1 { text-align: left; }
   .three-column-fields, .two-column-fields { grid-template-columns: 1fr; }

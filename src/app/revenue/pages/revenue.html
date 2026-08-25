@@ -71,16 +71,18 @@
       (pageChange)="pageChanged($event)"
     >
       <tr tableHeaders>
-        <th>RGC ID</th>
-        <th>Agency</th>
-        <th>Entity Name</th>
-        <th>RGC Status</th>
-        <th>Begin Date</th>
-        <th>End Date</th>
+        <th app-table-sort-th field="rgcNumber" [activeSort]="activeSort()" (sortChange)="sortChanged($event)">RGC ID</th>
+        <th app-table-sort-th field="agency" [activeSort]="activeSort()" (sortChange)="sortChanged($event)">Agency</th>
+        <th app-table-sort-th field="entityName" [activeSort]="activeSort()" (sortChange)="sortChanged($event)">Entity Name</th>
+        <th app-table-sort-th field="status" [activeSort]="activeSort()" (sortChange)="sortChanged($event)">RGC Status</th>
+        <th app-table-sort-th field="beginDate" [activeSort]="activeSort()" (sortChange)="sortChanged($event)">Begin Date</th>
+        <th app-table-sort-th field="endDate" [activeSort]="activeSort()" (sortChange)="sortChanged($event)">End Date</th>
       </tr>
-      @for (contract of searchResults(); track contract.rgcId) {
+      @for (contract of pagedSearchResults(); track contract.rgcId) {
         <tr tableRows>
-          <td>{{ contract.rgcNumber }}</td>
+          <td>
+            <a [href]="'/revenue/' + contract.rgcId">{{ contract.rgcNumber }}</a>
+          </td>
           <td>{{ contract.agency }}</td>
           <td>{{ contract.entityName }}</td>
           <td>{{ contract.status }}</td>
@@ -95,3 +97,4 @@
     </app-table-shell-header>
   }
 </main>
+  

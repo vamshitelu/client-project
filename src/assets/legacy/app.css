@@ -1,0 +1,153 @@
+        /*common alignment for table columns*/
+
+        .table-td-alignment-center {
+            text-align: center;
+        }
+
+        .table-td-alignment-right {
+            text-align: right;
+        }
+
+        .table-td-alignment-center {
+            text-align: center;
+        }
+
+        .amount-alignment {
+            text-align: right;
+        }
+
+        .table-th-child {
+            text-align: center;
+        }
+        /*end*/
+        /*css for sub header labels*/
+
+        .sub-header-label {
+            color: white;
+            /*background-color: #3B7AB5;*/
+            background-color: #22599C;
+            /*padding-top: 0.5em;*/
+            width: 100%;
+            height: 35px;
+        }
+        /*css to apply font for sub header labels*/
+
+        .sub-header-font {
+            color: white;
+            padding-top: 0.5em;
+            font-size: 16px;
+        }
+
+        .input-text-align-center {
+            text-align: center;
+        }
+        /* Below classes are used for form validations*/
+
+        .css-form input.ng-invalid {
+            border-color: #D3300A;
+            border-width: 2px;
+        }
+
+        .css-form select.ng-invalid {
+            border-color: #D3300A;
+            border-width: 2px;
+        }
+
+        .css-form textarea.ng-invalid {
+            border-color: #D3300A;
+            border-width: 2px;
+        }
+
+        .error-wrapper {
+            display: inline-block;
+            /*color:#cc3300;*/
+            color: #D3300A;
+        }
+
+        .css-form input.ng-invalid-date {
+            border-color: #D3300A;
+            border-width: 2px;
+        }
+
+        .error-message {
+            color: #D3300A;
+        }
+        /* END*/
+
+        input[type=text]::-ms-clear {
+            display: none;
+        }
+        /* applied for multiselect dropdowns text box to display selected values */
+
+        .txt-area-width {
+            width: 268px;
+            height: 89px;
+            border: 1px solid #5B5B5C;
+        }
+        /*applied for spacing between two rows*/
+
+        .div-padding {
+            margin-top: 15px;
+        }
+        /*applied for multiselect dropdown select box*/
+
+        .select-box-width {
+            width: 280px;
+            border: 1px solid #5B5B5C;
+        }
+        /* applied to display the data on hover*/
+
+        #display-full-data {
+            width: auto;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+        }
+
+        #display-full-data:hover {
+            overflow: visible;
+            white-space: normal;
+            width: auto;
+            word-wrap: break-word;
+        }
+
+        #display-full-data:focus {
+            overflow: visible;
+            white-space: normal;
+            width: auto;
+            word-wrap: break-word;
+        }
+        /*END*/
+        
+        [ng-cloak] {
+            display: none !important;
+        }
+        /*used to specify the field as required*/
+
+        .mandatory {
+            color: #de2211;
+            display: inline;
+        }
+
+        .i-frame {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
+        .wordwrap {
+            word-break: break-word;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .bankruptcywarning {
+            color: #000000;
+            background-color: #FAFAD2;
+        }

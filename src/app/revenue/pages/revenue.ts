@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, OnInit, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TableShellHeaderComponent } from '../../shared/components/data-table/table-shell-header/table-shell-header.component';
+import { SortState, TableSortThComponent } from '../../shared/components/data-table/table-sort-th/table-sort-th.component';
 import {
   AgencyLookup,
   DepartmentLookup,
@@ -14,7 +15,7 @@ import { RevenueService } from '../services/revenue.service';
 
 @Component({
   selector: 'app-revenue',
-  imports: [ReactiveFormsModule, DatePipe, TableShellHeaderComponent],
+  imports: [ReactiveFormsModule, DatePipe, TableShellHeaderComponent, TableSortThComponent],
   templateUrl: './revenue.html',
   styleUrl: './revenue.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,6 +34,22 @@ export class Revenue implements OnInit {
   protected revenueLeads: readonly string[] = [];
   private revenueLeadLookups: readonly RevenueLeadLookup[] = [];
   protected readonly searchResults = signal<readonly RevenueGeneratingContract[]>([]);
+  protected readonly activeSort = signal<SortState>({ field: 'rgcNumber', direction: 'asc' });
+  protected readonly sortedSearchResults = computed(() => {
+    const { field, direction } = this.activeSort();
+    const multiplier = direction === 'asc' ? 1 : -1;
+    return [...this.searchResults()].sort((left, right) =>
+      String(left[field as keyof RevenueGeneratingContract] ?? '').localeCompare(
+        String(right[field as keyof RevenueGeneratingContract] ?? ''),
+        undefined,
+        { numeric: true, sensitivity: 'base' },
+      ) * multiplier
+    );
+  });
+  protected readonly pagedSearchResults = computed(() => {
+    const start = (this.currentPage() - 1) * this.pageSize();
+    return this.sortedSearchResults().slice(start, start + this.pageSize());
+  });
   protected readonly totalResults = signal(0);
   protected readonly pageSize = signal(10);
   protected readonly currentPage = signal(1);
@@ -92,14 +109,19 @@ export class Revenue implements OnInit {
     this.searchForm.controls.department.reset('');
   }
 
+  protected sortChanged(sort: SortState): void {
+    this.activeSort.set(sort);
+  }
+
   protected search(): void {
     const criteria = this.searchForm.getRawValue();
     console.log('Revenue search request:', criteria);
     this.revenueService.search(criteria);
     this.revenueService.getRevenueGeneratingContracts().subscribe((response) => {
-      this.searchResults.set(response._embedded.revenueGeneratingContractList);
+      const contracts = response._embedded.revenueGeneratingContractList;
+      this.searchResults.set(contracts);
       this.totalResults.set(response.page.totalElements);
-      this.currentPage.set(response.page.number + 1);
+      this.currentPage.set(1);
     });
     this.searchSubmitted.set(true);
   }

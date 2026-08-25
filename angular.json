@@ -36,6 +36,11 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/legacy/bootstrap.css",
+              "src/assets/legacy/font-awesome.css",
+              "src/assets/legacy/app.css",
+              "src/assets/legacy/report.css",
+              "src/assets/legacy/scor.css",
               "src/styles.scss"
             ]
           },

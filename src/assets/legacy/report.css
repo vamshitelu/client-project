@@ -1,0 +1,54 @@
+.report-div-padding {
+    margin-top: 15px;
+}
+
+.report-select-box-width {
+    width: 280px;
+    border: 1px solid #5B5B5C;
+}
+
+.rgc-report-select-box-width {
+    width: 300px;
+    border: 1px solid #5B5B5C;
+}
+
+.report-txt-area-width {
+    width: 268px;
+    height: 87px;
+    border: 1px solid #5B5B5C;
+}
+
+.rgc-report-txt-area-width {
+    width: 311px;
+    height: 87px;
+    border: 1px solid #5B5B5C;
+}
+
+.report-left-padding-zero {
+    padding-left: 0px;
+}
+
+.report-bottom-padding-seven {
+    padding-bottom: 7px
+}
+
+.county-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.county-li {
+    float: left;
+    width: 25%;
+}
+
+.county-li-35 {
+    float: left;
+    width: 35%;
+}
+
+.label-non-bold {
+	font-weight: normal !important;
+}
