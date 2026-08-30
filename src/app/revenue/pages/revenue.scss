@@ -30,6 +30,8 @@ input:focus, select:focus { border-color: #24619c; outline: 2px solid #b9d5ef; o
 .date-field { grid-column: span 1; }
 .date-controls { display: grid; grid-template-columns: minmax(80px, 1.35fr) minmax(78px, 1fr); gap: 19px; }
 .date-controls input { padding-right: 5px; }
+.amount-field { display: grid; grid-template-columns: minmax(80px, 1.35fr) minmax(78px, 1fr); }
+.amount-field span, .amount-field input { grid-column: 1; }
 .form-actions { display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 13px; }
 .checkbox-label { display: inline-flex; align-items: center; gap: 6px; }
 .checkbox-label input { width: 13px; height: 13px; accent-color: #24619c; }
