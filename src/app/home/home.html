@@ -34,7 +34,7 @@
 
   @if (activeTab() === 'revenue') {
     <section id="revenue-panel" role="tabpanel" aria-labelledby="revenue-tab">
-      <app-revenue />
+      <router-outlet />
     </section>
   }@else if (activeTab() === 'expenses') {
     <section id="expenses-panel" role="tabpanel" aria-labelledby="expenses-tab">

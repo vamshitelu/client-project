@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {
   ResponseLite,
+  RevenueTakenInDetail,
+  RevenueGeneratingContract,
+  RevenueGeneratingContractListItem,
   RevenueGeneratingContractResponse,
 } from '../models/RevenueSearchCriteria';
 import responseLite from '../../../assets/data/response-lite.json';
 import contractResponse from '../../../assets/data/revenueGeneratingContractList.json';
+import contractDetails from '../../../assets/data/100000001.json';
 
 export interface RevenueSearchCriteria {
   rgcId: string;
@@ -33,7 +37,16 @@ export class RevenueService {
   }
 
   getRevenueGeneratingContracts(): Observable<RevenueGeneratingContractResponse> {
-    return of(contractResponse as RevenueGeneratingContractResponse);
+    return of(contractResponse as unknown as RevenueGeneratingContractResponse);
+  }
+
+  getRevenueContractDetail(rgcId: number): Observable<RevenueGeneratingContract | null> {
+    const detail = (contractDetails as RevenueGeneratingContract);
+    return of(rgcId === detail.rgcId ? detail : null);
+  }
+
+  getRevenueTakenInDetails(rgcId: number): Observable<readonly RevenueTakenInDetail[]> {
+    return of(rgcId === contractDetails.rgcId ? contractDetails.rgcRevenueDetailsList : []);
   }
 
   search(criteria: RevenueSearchCriteria): RevenueSearchCriteria {

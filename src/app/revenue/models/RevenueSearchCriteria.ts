@@ -94,25 +94,76 @@ export class ResponseLite {
   stateTypeLookupList: StateTypeLookup[] = [];
 }
 
+export interface RevenueGeneratingContractListItem {
+  rgcId: number;
+  rgcNumber: string;
+  agency: string | null;
+  division?: string | null;
+  department?: string | null;
+  entityName?: string;
+  federalId?: string | null;
+  revenueLead?: string | null;
+  beginDate?: number | null;
+  endDate?: number | null;
+  status?: string | null;
+  expectedRevenue?: number | null;
+  objective?: string;
+  comment?: string | null;
+  lastUpdatedBy?: string | null;
+  lastUpdatedDate?: number | null;
+  currentFyRevenue?: number;
+  totalRevenue?: number;
+  permissions?: readonly unknown[];
+}
+
 export interface RevenueGeneratingContract {
   rgcId: number;
   rgcNumber: string;
-  agency: string;
+  agency: AgencyLookup | null;
+  division: DivisionLookup | null;
+  department: DepartmentLookup | null;
   entityName: string;
-  status: string;
+  federalId: string | null;
+  revenueLead: RevenueLeadLookup | null;
   beginDate: number | null;
   endDate: number | null;
-  division: string;
-  department: string;
-  objective: string;
+  status: RgcStatusLookup | null;
   expectedRevenue: number | null;
-  revenueLead: string;
-  permissions: readonly unknown[];
+  objective: string;
+  comment: string | null;
+  lastUpdatedBy: string | null;
+  lastUpdatedDate: number | null;
+  currentFyRevenue: number;
+  totalRevenue: number;
+  address1: string | null;
+  address2: string | null;
+  city: string | null;
+  state: StateTypeLookup | null;
+  zip: string | null;
+  addressComment: string | null;
+  phone: string | null;
+  phoneExtension: string | null;
+  revenueContractDocumentsUploaded: Array<{
+    documentType: RgcDocumentTypeLookup | null;
+    documentNames: Record<string, string> | null;
+  }> | null;
+  revenueContractDocumentsAttached: unknown[] | null;
+  docsToBeDeletedForAudit: Record<string, unknown> | null;
+  permissions?: readonly unknown[];
+}
+
+export interface RevenueTakenInDetail {
+  rgcRevenueId: number;
+  number: number;
+  rgcRevenueTakenIn: number | null;
+  rgcRevenueDate: number | string| null;
+  rgcInvoiceNumber: string;
+  isNew?: boolean;
 }
 
 export interface RevenueGeneratingContractResponse {
   _embedded: {
-    revenueGeneratingContractList: RevenueGeneratingContract[];
+    revenueGeneratingContractList: RevenueGeneratingContractListItem[];
   };
   page: {
     size: number;

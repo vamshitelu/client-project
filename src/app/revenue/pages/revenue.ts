@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, OnInit, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { TableShellHeaderComponent } from '../../shared/components/data-table/table-shell-header/table-shell-header.component';
 import { SortState, TableSortThComponent } from '../../shared/components/data-table/table-sort-th/table-sort-th.component';
 import {
@@ -9,13 +10,13 @@ import {
   DivisionLookup,
   ResponseLite,
   RevenueLeadLookup,
-  RevenueGeneratingContract,
+  RevenueGeneratingContractListItem,
 } from '../models/RevenueSearchCriteria';
 import { RevenueService } from '../services/revenue.service';
 
 @Component({
   selector: 'app-revenue',
-  imports: [ReactiveFormsModule, DatePipe, TableShellHeaderComponent, TableSortThComponent],
+  imports: [ReactiveFormsModule, DatePipe, RouterLink, TableShellHeaderComponent, TableSortThComponent],
   templateUrl: './revenue.html',
   styleUrl: './revenue.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,14 +34,14 @@ export class Revenue implements OnInit {
   protected rgcStatuses: readonly string[] = [];
   protected revenueLeads: readonly string[] = [];
   private revenueLeadLookups: readonly RevenueLeadLookup[] = [];
-  protected readonly searchResults = signal<readonly RevenueGeneratingContract[]>([]);
+  protected readonly searchResults = signal<readonly RevenueGeneratingContractListItem[]>([]);
   protected readonly activeSort = signal<SortState>({ field: 'rgcNumber', direction: 'asc' });
   protected readonly sortedSearchResults = computed(() => {
     const { field, direction } = this.activeSort();
     const multiplier = direction === 'asc' ? 1 : -1;
     return [...this.searchResults()].sort((left, right) =>
-      String(left[field as keyof RevenueGeneratingContract] ?? '').localeCompare(
-        String(right[field as keyof RevenueGeneratingContract] ?? ''),
+      String(left[field as keyof RevenueGeneratingContractListItem] ?? '').localeCompare(
+        String(right[field as keyof RevenueGeneratingContractListItem] ?? ''),
         undefined,
         { numeric: true, sensitivity: 'base' },
       ) * multiplier

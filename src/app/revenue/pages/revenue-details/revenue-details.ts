@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { RevenueGeneratingContract } from '../../models/RevenueSearchCriteria';
+import { RevenueGeneratingContract, RevenueTakenInDetail } from '../../models/RevenueSearchCriteria';
 import { RevenueService } from '../../services/revenue.service';
 
 @Component({
@@ -17,6 +17,10 @@ export class RevenueDetails implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly revenueService = inject(RevenueService);
   protected readonly contract = signal<RevenueGeneratingContract | null>(null);
+  protected readonly revenueTakenInDetails = signal<readonly RevenueTakenInDetail[]>([]);
+  protected readonly selectedRevenueDetails = signal<readonly number[]>([]);
+  protected readonly revenueDetailsSubmitted = signal(false);
+  protected readonly currentFyRevenue = computed(() => this.revenueTakenInDetails().reduce((total, detail) => total + (detail.rgcRevenueTakenIn ?? 0), 0));
   protected readonly isEditing = signal(false);
   protected readonly contractForm = this.formBuilder.group({
     agency: [''], division: [''], department: [''], entityName: [''], federalId: [''],
@@ -25,20 +29,159 @@ export class RevenueDetails implements OnInit {
   });
 
   ngOnInit(): void {
-    const rgcId = Number(this.route.snapshot.paramMap.get('rgcId'));
-    this.revenueService.getRevenueGeneratingContracts().subscribe((response) => {
-      const selectedContract = response._embedded.revenueGeneratingContractList.find((item) => item.rgcId === rgcId) ?? null;
+    const rgcId = Number(this.route.snapshot.paramMap.get('rgcId') ?? 100000001);
+    this.revenueService.getRevenueContractDetail(rgcId).subscribe((selectedContract) => {
       this.contract.set(selectedContract);
       if (selectedContract) {
+        this.revenueService.getRevenueTakenInDetails(rgcId).subscribe((details) => this.revenueTakenInDetails.set(details));
         this.patchContractForm(selectedContract);
         this.contractForm.disable();
       }
     });
   }
 
+  protected addRevenueDetail(): void {
+    this.revenueTakenInDetails.update((details) => [
+      ...details,
+      { rgcRevenueId: Date.now(), number: details.length + 1, rgcRevenueTakenIn: null, rgcRevenueDate: null, rgcInvoiceNumber: '', isNew: true },
+    ]);
+    this.revenueDetailsSubmitted.set(true);
+  }
+
+  protected toggleRevenueDetail(rgcRevenueId: number): void {
+    this.selectedRevenueDetails.update((selected) => selected.includes(rgcRevenueId)
+      ? selected.filter((id) => id !== rgcRevenueId)
+      : [...selected, rgcRevenueId]);
+  }
+
+  protected deleteRevenueDetails(): void {
+    const selected = this.selectedRevenueDetails();
+    this.revenueTakenInDetails.update((details) => details.filter((detail) => !selected.includes(detail.rgcRevenueId)));
+    this.selectedRevenueDetails.set([]);
+  }
+
+  protected saveRevenueDetails(): void {
+    this.revenueDetailsSubmitted.set(true);
+    if (this.revenueTakenInDetails().some((detail) => detail.rgcRevenueTakenIn === null || detail.rgcRevenueDate === null)) return;
+
+    this.revenueTakenInDetails.update((details) => details.map((detail) => ({ ...detail, isNew: false })));
+    this.contractForm.disable();
+    this.isEditing.set(false);
+  }
+
+  protected cancelRevenueDetails(): void {
+    const rgcId = Number(this.route.snapshot.paramMap.get('rgcId'));
+    this.revenueService.getRevenueTakenInDetails(rgcId).subscribe((details) => this.revenueTakenInDetails.set(details));
+    this.selectedRevenueDetails.set([]);
+    this.revenueDetailsSubmitted.set(false);
+    this.contractForm.disable();
+    this.isEditing.set(false);
+  }
+
+  protected updateRevenueDetail(detail: RevenueTakenInDetail, field: 'rgcRevenueTakenIn' | 'rgcRevenueDate' | 'rgcInvoiceNumber', value: string): void {
+    this.revenueTakenInDetails.update((details) => details.map((item) => item.rgcRevenueId === detail.rgcRevenueId
+      ? {
+        ...item,
+        [field]: field === 'rgcRevenueTakenIn'
+          ? Number(value.replace(/[$,]/g, '')) || 0
+          : field === 'rgcRevenueDate'
+            ? this.parseDateValue(value)
+            : value,
+      }
+      : item));
+  }
+
   protected enableEditing(): void {
     this.isEditing.set(true);
     this.contractForm.disable();
+  }
+
+  protected formatDateForDisplay(timestamp: string | number | null): string {
+    if (timestamp === null || timestamp === '') {
+      return '';
+    }
+
+    const value = typeof timestamp === 'number' ? timestamp : this.parseDateValue(timestamp);
+    if (value === null) {
+      return '';
+    }
+
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+      return '';
+    }
+
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    const year = date.getUTCFullYear();
+    return `${month}/${day}/${year}`;
+  }
+  /*
+  protected parseDateValue(value: string): number | null {
+    if (!value || !/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(value.trim())) {
+      return null;
+    }
+
+    const [month, day, year] = value.split('/').map((part) => Number(part));
+    const parsedDate = new Date(year, month - 1, day);
+    return Number.isNaN(parsedDate.getTime()) ? null : parsedDate.getTime();
+  }*/
+
+  protected parseDateValue(value: string): number | null {
+  if (!value) return null;
+  const trimmed = value.trim();
+
+  // native <input type="date"> always emits ISO yyyy-mm-dd on selection
+  const isoMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(trimmed);
+  if (isoMatch) {
+    const [, y, m, d] = isoMatch;
+    return this.buildDate(Number(y), Number(m), Number(d));
+  }
+
+  // required typed/display format: mm/dd/yyyy
+  const usMatch = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(trimmed);
+  if (usMatch) {
+    const [, m, d, y] = usMatch;
+    return this.buildDate(Number(y), Number(m), Number(d));
+  }
+
+  return null;
+}
+
+private buildDate(year: number, month: number, day: number): number | null {
+  if (month < 1 || month > 12 || day < 1 || day > 31) return null;
+
+  const parsedDate = new Date(Date.UTC(year, month - 1, day));
+  const isValid = parsedDate.getUTCFullYear() === year
+    && parsedDate.getUTCMonth() === month - 1
+    && parsedDate.getUTCDate() === day;
+
+  return isValid ? parsedDate.getTime() : null;
+}
+
+protected onPickerSelect(event: Event, field: 'beginDate' | 'endDate'): void {
+  const iso = (event.target as HTMLInputElement).value; // yyyy-mm-dd
+  const parsed = this.parseDateValue(iso);
+  this.contractForm.get(field)?.setValue(parsed === null ? '' : this.formatDateForDisplay(parsed));
+}
+
+protected onDateInput(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  console.log('onDateInput called with value:', input.value);
+  let digits = input.value.replace(/\D/g, '').slice(0, 8); // strip everything but digits, cap at 8 (mmddyyyy)
+
+  if (digits.length >= 5) {
+    input.value = `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
+  } else if (digits.length >= 3) {
+    input.value = `${digits.slice(0, 2)}/${digits.slice(2)}`;
+  } else {
+    input.value = digits;
+  }
+}
+
+  protected setContractDate(field: 'beginDate' | 'endDate', value: string): void {
+    const parsed = this.parseDateValue(value);
+    this.contractForm.get(field)?.setValue(parsed === null ? '' : this.formatDateForDisplay(parsed));
   }
 
   protected cancelEditing(): void {
@@ -50,17 +193,69 @@ export class RevenueDetails implements OnInit {
     this.isEditing.set(false);
   }
 
+  protected getLookupLabel(value: unknown, propertyName?: string): string {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'string') return value;
+    if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+    if (typeof value === 'object') {
+      const record = value as Record<string, unknown>;
+      if (propertyName) {
+        const target = record[propertyName];
+        if (typeof target === 'string') return target;
+        if (typeof target === 'number') return String(target);
+      }
+
+      const fallback = Object.values(record)
+        .filter((entry) => typeof entry === 'string')
+        .join(' ');
+      return fallback;
+    }
+
+    return String(value);
+  }
+
   private patchContractForm(selectedContract: RevenueGeneratingContract): void {
     this.contractForm.patchValue({
-      ...selectedContract,
-      federalId: '',
-      beginDate: this.toDateInputValue(selectedContract.beginDate),
-      endDate: this.toDateInputValue(selectedContract.endDate),
+      agency: this.getLookupLabel(selectedContract.agency, 'agencyName'),
+      division: this.getLookupLabel(selectedContract.division, 'divisionName'),
+      department: this.getLookupLabel(selectedContract.department, 'departmentName'),
+      entityName: selectedContract.entityName ?? '',
+      federalId: selectedContract.federalId ?? '',
+      revenueLead: this.getLookupLabel(selectedContract.revenueLead, 'name'),
+      status: this.getLookupLabel(selectedContract.status, 'rgcStatusName'),
+      beginDate: this.formatDateForDisplay(selectedContract.beginDate),
+      endDate: this.formatDateForDisplay(selectedContract.endDate),
       expectedRevenue: selectedContract.expectedRevenue === null ? '' : `$${selectedContract.expectedRevenue.toFixed(2)}`,
+      objective: selectedContract.objective ?? '',
+      comment: selectedContract.comment ?? '',
     });
   }
 
-  private toDateInputValue(timestamp: number | null): string {
-    return timestamp ? new Date(timestamp).toISOString().slice(0, 10) : '';
+  protected toDateInputValue(value: string | number | null): string {
+    if (value === null || value === '') {
+      return '';
+    }
+
+    const timestamp = typeof value === 'number' ? value : this.parseDateValue(value);
+    if (timestamp === null) {
+      return '';
+    }
+
+    const date = new Date(timestamp);
+    return Number.isNaN(date.getTime()) ? '' : date.toISOString().slice(0, 10);
+  }
+
+  protected getDocumentNames(documentNames: Record<string, string> | null): string {
+    return this.getDocumentNamesArray(documentNames).join(', ');
+  }
+
+  protected getDocumentNamesArray(documentNames: Record<string, string> | null): string[] {
+    if (!documentNames) {
+      return [];
+    }
+
+    return Object.keys(documentNames)
+      .map((key) => documentNames[key])
+      .filter((name) => !!name);
   }
 }

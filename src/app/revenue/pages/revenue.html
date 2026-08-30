@@ -81,7 +81,7 @@
       @for (contract of pagedSearchResults(); track contract.rgcId) {
         <tr tableRows>
           <td>
-            <a [href]="'/revenue/' + contract.rgcId">{{ contract.rgcNumber }}</a>
+            <a [routerLink]="['/revenue', contract.rgcId]">{{ contract.rgcNumber }}</a>
           </td>
           <td>{{ contract.agency }}</td>
           <td>{{ contract.entityName }}</td>

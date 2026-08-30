@@ -1,52 +1,148 @@
-<main class="details-shell">
+<main class="page-shell">
   @if (contract(); as selectedContract) {
     <header class="details-header">
       <h1>Revenue Generating Contract Detail</h1>
       <p>HHS or DFPS is the Performing Agency</p>
-      @if (isEditing()) {
-        <button class="edit-button" type="button" (click)="cancelEditing()">Cancel</button>
-      } @else {
-        <button class="edit-button" type="button" (click)="enableEditing()">Edit</button>
-      }
+      <button class="edit-button" type="button" (click)="enableEditing()">Edit</button>
     </header>
 
-    <form class="contract-card" [formGroup]="contractForm" aria-labelledby="contract-number">
+    <form class="contract-card" [formGroup]="contractForm" aria-labelledby="contract-number" lang="en-US">
       <h2 id="contract-number">{{ selectedContract.rgcNumber }}</h2>
       <dl class="contract-fields">
-        <div><dt [class.required]="isEditing()">Agency</dt><dd>@if (isEditing()) { <input type="text" formControlName="agency" /> } @else { {{ selectedContract.agency }} }</dd></div>
-        <div><dt [class.required]="isEditing()">Division</dt><dd>@if (isEditing()) { <input type="text" formControlName="division" /> } @else { {{ selectedContract.division }} }</dd></div>
-        <div><dt [class.required]="isEditing()">Department</dt><dd>@if (isEditing()) { <input type="text" formControlName="department" /> } @else { {{ selectedContract.department }} }</dd></div>
+        <div><dt [class.required]="isEditing()">Agency</dt><dd>@if (isEditing()) { <input type="text" formControlName="agency" /> } @else { {{ getLookupLabel(selectedContract.agency, 'agencyName') }} }</dd></div>
+        <div><dt [class.required]="isEditing()">Division</dt><dd>@if (isEditing()) { <input type="text" formControlName="division" /> } @else { {{ getLookupLabel(selectedContract.division, 'divisionName') }} }</dd></div>
+        <div><dt [class.required]="isEditing()">Department</dt><dd>@if (isEditing()) { <input type="text" formControlName="department" /> } @else { {{ getLookupLabel(selectedContract.department, 'departmentName') }} }</dd></div>
         <div><dt [class.required]="isEditing()">Entity Name</dt><dd>@if (isEditing()) { <input type="text" formControlName="entityName" /> } @else { {{ selectedContract.entityName }} }</dd></div>
-        <div><dt>Federal ID</dt><dd>@if (isEditing()) { <input type="text" formControlName="federalId" /> } @else { }</dd></div>
-        <div><dt [class.required]="isEditing()">Revenue Lead</dt><dd>@if (isEditing()) { <input type="text" formControlName="revenueLead" /> } @else { {{ selectedContract.revenueLead }} }</dd></div>
-        <div><dt [class.required]="isEditing()">Begin Date</dt><dd>@if (isEditing()) { <span class="date-input"><input type="date" formControlName="beginDate" aria-label="Begin date" required /><span class="calendar-symbol" aria-hidden="true"></span></span> } @else { {{ selectedContract.beginDate | date: 'MM/dd/yyyy' }} }</dd></div>
-        <div><dt [class.required]="isEditing()">End Date</dt><dd>@if (isEditing()) { <span class="date-input"><input type="date" formControlName="endDate" aria-label="End date" required /><span class="calendar-symbol" aria-hidden="true"></span></span> } @else { {{ selectedContract.endDate | date: 'MM/dd/yyyy' }} }</dd></div>
-        <div><dt>RGC Status</dt><dd>@if (isEditing()) { <input type="text" formControlName="status" /> } @else { {{ selectedContract.status }} }</dd></div>
+        <div><dt>Federal ID</dt><dd>@if (isEditing()) { <input type="text" formControlName="federalId" /> } @else { {{ selectedContract.federalId ?? '' }} }</dd></div>
+        <div><dt [class.required]="isEditing()">Revenue Lead</dt><dd>@if (isEditing()) { <input type="text" formControlName="revenueLead" /> } @else { {{ getLookupLabel(selectedContract.revenueLead, 'name') }} }</dd></div>
+        <div><dt [class.required]="isEditing()">Begin Date</dt><dd>@if (isEditing()) { 
+          <span class="date-input">
+            <input type="text" formControlName="beginDate" placeholder="mm/dd/yyyy" maxlength="10"
+              (input)="onDateInput($event)" aria-label="Begin date" required #beginDateText />
+            <!--  <input type="date" class="date-picker-trigger" tabindex="-1"
+              (change)="onPickerSelect($event, 'beginDate')" aria-hidden="true" /> -->
+          </span>
+        } @else { {{ selectedContract.beginDate | date: 'MM/dd/yyyy' }} }</dd></div>
+        <div><dt [class.required]="isEditing()">End Date</dt><dd>@if (isEditing()) { 
+          <span class="date-input">
+            <input type="text" formControlName="endDate" placeholder="mm/dd/yyyy" maxlength="10"
+              (input)="onDateInput($event)" aria-label="End date" required #endDateText />
+              <!-- <input type="date" class="date-picker-trigger" tabindex="-1"
+              (change)="onPickerSelect($event, 'endDate')" aria-hidden="true" /> -->
+          </span> 
+        } @else { {{ selectedContract.endDate | date: 'MM/dd/yyyy' }} }</dd></div>
+        <div><dt>RGC Status</dt><dd>@if (isEditing()) { <input type="text" formControlName="status" /> } @else { {{ getLookupLabel(selectedContract.status, 'rgcStatusName') }} }</dd></div>
         <div><dt [class.required]="isEditing()">Expected Revenue</dt><dd>@if (isEditing()) { <input type="text" formControlName="expectedRevenue" /> } @else { {{ selectedContract.expectedRevenue === null ? '$0.00' : ('$' + selectedContract.expectedRevenue.toFixed(2)) }} }</dd></div>
         <div><dt [class.required]="isEditing()">Objective</dt><dd>@if (isEditing()) { <textarea formControlName="objective" rows="3"></textarea> } @else { {{ selectedContract.objective }} }</dd></div>
-        <div><dt>Comment</dt><dd>@if (isEditing()) { <textarea formControlName="comment" rows="3"></textarea> } @else { Not available }</dd></div>
+        <div><dt>Comment</dt><dd>@if (isEditing()) { <textarea formControlName="comment" rows="3"></textarea> } @else { {{ selectedContract.comment ?? 'Not available' }} }</dd></div>
       </dl>
       <footer class="contract-footer">
-        <div class="audit-field"><strong>Last Updated By</strong><span>Hhsadmin, Adminone</span></div>
-        <div class="audit-field"><strong>Last Updated Date</strong><span>08/22/2026 09:49</span></div>
+        <div class="audit-field"><strong>Last Updated By</strong><span>{{ selectedContract.lastUpdatedBy ?? 'Not available' }}</span></div>
+        <div class="audit-field"><strong>Last Updated Date</strong><span>{{ selectedContract.lastUpdatedDate ? (selectedContract.lastUpdatedDate | date: 'MM/dd/yyyy hh:mm') : 'Not available' }}</span></div>
         <button class="documents-button" type="button" disabled>Download All Documents</button>
       </footer>
     </form>
 
     <section class="detail-section documents-section" aria-labelledby="documents-heading">
       <h2 id="documents-heading">Documents Uploaded</h2>
-      <div class="documents-row">
-        <div><strong>Document Type</strong><span>Contract</span></div>
-        <div><strong>Files Uploaded</strong><span></span></div>
-      </div>
+      @if (selectedContract.revenueContractDocumentsUploaded?.length) {
+        @for (document of selectedContract.revenueContractDocumentsUploaded; track $index) {
+          <div class="documents-row">
+            <div><strong>Document Type</strong><span>{{ document.documentType?.documentTypeName ?? 'Contract' }}</span></div>
+            <div><strong>Files Uploaded</strong><span>
+              @for (fileName of getDocumentNamesArray(document.documentNames); track fileName) {
+                <a [href]="'#'" [attr.download]="fileName">{{ fileName }}</a>
+              }
+            </span></div>
+          </div>
+        }
+      } @else {
+        <div class="documents-row">
+          <div><strong>Document Type</strong><span>Contract</span></div>
+          <div><strong>Files Uploaded</strong><span>No documents uploaded</span></div>
+        </div>
+      }
     </section>
 
     <section class="detail-section address-section" aria-labelledby="address-heading">
       <h2 id="address-heading">Revenue Address</h2>
       <div class="address-row">
-        <div><strong>Address1</strong><span></span></div>
-        <div><strong>Address2</strong><span></span></div>
+        <div><strong>Address1</strong><span>{{ selectedContract.address1 ?? '' }}</span></div>
+        <div><strong>Address2</strong><span>{{ selectedContract.address2 ?? '' }}</span></div>
       </div>
+      <div class="address-row">
+        <div><strong>City</strong><span>{{ selectedContract.city ?? '' }}</span></div>
+        <div><strong>State</strong><span>{{ getLookupLabel(selectedContract.state, 'stateName') }}</span></div>
+      </div>
+      <div class="address-row">
+        <div><strong>Zip</strong><span>{{ selectedContract.zip ?? '' }}</span></div>
+        <div><strong>Address Comment</strong><span>{{ selectedContract.addressComment ?? '' }}</span></div>
+      </div>
+    </section>
+
+    <section class="detail-section revenue-taken-section" aria-labelledby="revenue-taken-heading">
+      <h2 id="revenue-taken-heading">Revenue Taken In Details</h2>
+      <div class="revenue-taken-actions">
+        <button class="edit-button" type="button" (click)="addRevenueDetail()" [disabled]="!isEditing()">Add New Revenue Taken In Details</button>
+        <button class="edit-button" type="button" (click)="deleteRevenueDetails()" [disabled]="!isEditing() || selectedRevenueDetails().length === 0">Delete</button>
+      </div>
+      <div class="revenue-table-wrapper">
+        <table class="revenue-table">
+          <thead>
+            <tr><th>No.</th><th>Revenue Taken In</th><th>Revenue Earned Date</th><th>Invoice No.</th><th>Select All</th></tr>
+          </thead>
+          <tbody>
+            @for (detail of revenueTakenInDetails(); track detail.rgcRevenueId; let rowNumber = $index) {
+              <tr>
+                <td>{{ rowNumber + 1 }}</td>
+                <td><input type="text" [value]="detail.rgcRevenueTakenIn === null ? '' : '$' + detail.rgcRevenueTakenIn.toFixed(2)" (change)="updateRevenueDetail(detail, 'rgcRevenueTakenIn', $any($event.target).value)" [disabled]="!isEditing()" [class.invalid]="revenueDetailsSubmitted() && detail.rgcRevenueTakenIn === null" aria-label="Revenue taken in" />@if (revenueDetailsSubmitted() && detail.rgcRevenueTakenIn === null) { <small class="validation-error">Revenue Taken In - is a required field.</small> }</td>
+                <td>
+                  <span class="date-input table-date-input">
+                    <input
+                      type="text"
+                      [value]="formatDateForDisplay(detail.rgcRevenueDate)"
+                      placeholder="mm/dd/yyyy"
+                      maxlength="10"
+                      (input)="onDateInput($event)"
+                      (change)="updateRevenueDetail(detail, 'rgcRevenueDate', $any($event.target).value)"
+                      [disabled]="!isEditing()"
+                      [class.invalid]="revenueDetailsSubmitted() && detail.rgcRevenueDate === null"
+                      aria-label="Revenue earned date"
+                      required
+                    />
+                    <input
+                      type="date"
+                      class="date-picker-trigger"
+                      tabindex="-1"
+                      [value]="toDateInputValue(detail.rgcRevenueDate)"
+                      (change)="updateRevenueDetail(detail, 'rgcRevenueDate', $any($event.target).value)"
+                      [disabled]="!isEditing()"
+                      aria-hidden="true"
+                    />
+                  </span>
+
+                  @if (revenueDetailsSubmitted() && detail.rgcRevenueDate === null) {
+                    <small class="validation-error date-error">Revenue Earned Date - is a required field.</small>
+                  }
+                </td>
+                <td><input type="text" [value]="detail.rgcInvoiceNumber" (change)="updateRevenueDetail(detail, 'rgcInvoiceNumber', $any($event.target).value)" [disabled]="!isEditing()" aria-label="Invoice number" /></td>
+                <td><input type="checkbox" [checked]="selectedRevenueDetails().includes(detail.rgcRevenueId)" (change)="toggleRevenueDetail(detail.rgcRevenueId)" [disabled]="!isEditing()" aria-label="Select revenue detail {{ rowNumber + 1 }}" /></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="revenue-totals">
+        <div><strong>Current FY Revenue</strong><span>${{ currentFyRevenue().toFixed(2) }}</span></div>
+        <div><strong>Total Revenue</strong><span>${{ currentFyRevenue().toFixed(2) }}</span></div>
+      </div>
+      <!--
+      <div class="revenue-footer-actions">
+        <button class="edit-button" type="button" (click)="saveRevenueDetails()" [disabled]="!isEditing()">Save</button>
+        <button class="edit-button" type="button" (click)="cancelRevenueDetails()" [disabled]="!isEditing()">Cancel</button>
+        <button class="edit-button" type="button" (click)="deleteRevenueDetails()" [disabled]="!isEditing() || selectedRevenueDetails().length === 0">Delete</button>
+      </div>
+    -->
     </section>
   } @else {
     <section class="not-found">

@@ -1,0 +1,197 @@
+{
+    "rgcId": 100000001,
+    "rgcNumber": "HHSREV100000001-A",
+    "agency": {
+        "agencyId": "1",
+        "agencyName": "HHSC-A",
+        "createdBy": null,
+        "updatedBy": null,
+        "createdDate": null,
+        "updatedDate": null,
+        "effectiveDate": null,
+        "expirationDate": null,
+        "disable": false
+    },
+    "division": {
+        "divisionId": "17",
+        "divisionName": "Medicaid and CHIP Services-A",
+        "agencyId": "1",
+        "createdBy": null,
+        "updatedBy": null,
+        "createdDate": null,
+        "updatedDate": null,
+        "effectiveDate": null,
+        "expirationDate": null,
+        "disable": false
+    },
+    "department": {
+        "departmentId": "1",
+        "departmentName": "Access and Eligibility-A",
+        "divisionId": "17",
+        "createdBy": null,
+        "updatedBy": null,
+        "createdDate": null,
+        "updatedDate": null,
+        "effectiveDate": null,
+        "expirationDate": null,
+        "disable": true
+    },
+    "entityName": "Adventist Health System/Sunbelt, Inc.-A",
+    "federalId": "742575462-A",
+    "revenueLead": {
+        "userId": 1801,
+        "userName": "00000139212",
+        "name": "Vasquez, David E-A",
+        "userAssigned": true,
+        "agencyName": "HHSC-A",
+        "scorUser": true,
+        "disable": false
+    },
+    "beginDate": 1533099600000,
+    "endDate": 1533099600000,
+    "status": {
+        "rgcStatusId": 3,
+        "rgcStatusName": "Expired-A",
+        "createdBy": null,
+        "updatedBy": null,
+        "createdDate": null,
+        "updatedDate": null,
+        "effectiveDate": null,
+        "expirationDate": null,
+        "disable": false
+    },
+    "expectedRevenue": 5.00,
+    "objective": "Outstationed Eligibility Advisor/ME Specialists in Health Care Facilities-A",
+    "comment": "Closed-A",
+    "lastUpdatedBy": "Hhsadmin, Adminone",
+    "lastUpdatedDate": 1787319989169,
+    "uploadedDocumentsToBeDeleted": null,
+    "currentFyRevenue": 0,
+    "totalRevenue": 0,
+    "address1": "1234",
+    "address2": null,
+    "city": "Austin",
+    "state": {
+        "stateId": 43,
+        "stateName": "TX",
+        "createdBy": "scor",
+        "updatedBy": "scor",
+        "createdDate": 1474137713000,
+        "updatedDate": 1493240650073,
+        "effectiveDate": 1431406800000,
+        "expirationDate": null,
+        "disable": false
+    },
+    "zip": "78748",
+    "addressComment": null,
+    "phone": null,
+    "phoneExtension": null,
+    "revenueContractDocumentsUploaded": [
+        {
+            "documentType": {
+                "documentTypeId": "8",
+                "documentTypeName": "Contract",
+                "createdBy": null,
+                "updatedBy": null,
+                "documentNomenclatureFormat": null,
+                "createdDate": null,
+                "updatedDate": null,
+                "effectiveDate": null,
+                "expirationDate": null,
+                "formName": null,
+                "disable": false
+            },
+            "documentNames": {
+                "1": "Adventist Health Systm Sunbelt Inc dba Central Texas Medical Center 529-18-0014.pdf"
+            }
+        }
+    ],
+    "revenueContractDocumentsAttached": null,
+    "rgcRevenueDetailsList": [
+        {
+            "rgcRevenueId": 1575,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1504242000000,
+            "rgcInvoiceNumber": "6007000010917"
+        },
+        {
+            "rgcRevenueId": 1576,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1506834000000,
+            "rgcInvoiceNumber": "6007000011017"
+        },
+        {
+            "rgcRevenueId": 1577,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1509512400000,
+            "rgcInvoiceNumber": "6007000011117"
+        },
+        {
+            "rgcRevenueId": 1578,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1512108000000,
+            "rgcInvoiceNumber": "6007000011217"
+        },
+        {
+            "rgcRevenueId": 1579,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1514786400000,
+            "rgcInvoiceNumber": "6007000010118"
+        },
+        {
+            "rgcRevenueId": 1580,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1517464800000,
+            "rgcInvoiceNumber": "6007000010218"
+        },
+        {
+            "rgcRevenueId": 1581,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1519884000000,
+            "rgcInvoiceNumber": "6007000010318"
+        },
+        {
+            "rgcRevenueId": 2218,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1522558800000,
+            "rgcInvoiceNumber": "6007000010418"
+        },
+        {
+            "rgcRevenueId": 2219,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1525150800000,
+            "rgcInvoiceNumber": "6007000010518"
+        },
+        {
+            "rgcRevenueId": 2220,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1527829200000,
+            "rgcInvoiceNumber": "6007000010618"
+        },
+        {
+            "rgcRevenueId": 2221,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1530421200000,
+            "rgcInvoiceNumber": "6007000010718"
+        },
+        {
+            "rgcRevenueId": 2222,
+            "number": 0,
+            "rgcRevenueTakenIn": 0,
+            "rgcRevenueDate": 1530421200000,
+            "rgcInvoiceNumber": "6007000010818"
+        }
+    ],
+    "docsToBeDeletedForAudit": {}
+}

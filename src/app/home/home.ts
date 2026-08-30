@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { Revenue } from '../revenue/pages/revenue';
+import { RouterOutlet } from '@angular/router';
 
 type HomeTab = 'revenue' | 'expenses' | 'history';
 
 @Component({
   selector: 'app-home',
-  imports: [Revenue],
+  imports: [RouterOutlet],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

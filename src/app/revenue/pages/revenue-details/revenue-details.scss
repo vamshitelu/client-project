@@ -6,9 +6,9 @@
   font-size: 11px;
 }
 
-.details-shell {
+.page-shell {
   min-height: 100dvh;
-  padding: 0 47px 28px;
+  padding: 17px 12px 28px;
   box-sizing: border-box;
   background: #fff;
 }
@@ -64,7 +64,6 @@ h1 {
 
 .contract-card {
   border: 1px solid #7493b0;
-  max-width: none;
 }
 
 .contract-card h2 {
@@ -101,6 +100,12 @@ h1 {
   appearance: auto;
   cursor: pointer;
   padding-right: 2px;
+}
+
+.contract-fields input[type='date']::-webkit-calendar-picker-indicator,
+.revenue-table input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .contract-fields input[type='date']:disabled { cursor: not-allowed; }
@@ -188,8 +193,140 @@ h1 {
 }
 
 .detail-section {
-  margin-top: 14px;
+  max-width: 1240px;
+  margin: 14px auto 0;
   border: 1px solid #7493b0;
+}
+
+.revenue-taken-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.revenue-table-wrapper {
+  overflow-x: auto;
+}
+
+.revenue-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.revenue-table th {
+  padding: 6px;
+  background: #24619c;
+  color: #fff;
+  font-weight: 700;
+  text-align: left;
+}
+
+.revenue-table th:first-child,
+.revenue-table td:first-child { width: 35px; text-align: center; }
+.revenue-table th:nth-child(2) { width: 30%; }
+.revenue-table th:nth-child(3) { width: 27%; }
+.revenue-table th:nth-child(4) { width: 27%; }
+.revenue-table th:last-child,
+.revenue-table td:last-child { width: 80px; text-align: center; }
+
+.revenue-table td {
+  padding: 5px;
+  background: #f7f7f7;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.revenue-table td { vertical-align: top; }
+.revenue-table input.invalid { border-color: #cc0000; }
+.validation-error { display: block; color: #cc0000; font-weight: 700; line-height: 1.2; }
+.date-error { margin-bottom: 3px; }
+
+.revenue-table tr:nth-child(even) td { background: #fff; }
+.revenue-table input[type='text'],
+.revenue-table input[type='date']:not(.date-picker-trigger){
+  width: 100%;
+  height: 26px;
+  box-sizing: border-box;
+}
+.revenue-table input[type='date'] {
+  cursor: pointer;
+}
+.revenue-table input[type='checkbox'] { width: 13px; height: 13px; }
+.table-date-input {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.table-date-input input {
+  width: 100%;
+  padding-right: 28px;
+}
+.table-date-input::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.table-date-input .date-picker-trigger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+.table-date-input .calendar-symbol {
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  border-color: #555;
+}
+.revenue-table input:disabled { opacity: 1; color: #555; background: #f2f2f2; cursor: not-allowed; }
+
+.revenue-taken-actions .edit-button { position: static; }
+.revenue-table input.date-picker-trigger:disabled {
+  opacity: 0;
+}
+.revenue-taken-actions .edit-button:disabled {
+  background: #9aa5b1;
+  cursor: not-allowed;
+}
+
+.revenue-totals {
+  width: 260px;
+  margin: 12px 0 0 auto;
+}
+
+.revenue-totals div {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.revenue-footer-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 12px 0 14px;
 }
 
 .detail-section h2 {
@@ -242,8 +379,8 @@ dd {
 }
 
 @media (max-width: 760px) {
-  .details-shell {
-    padding: 0 22px 28px;
+  .page-shell {
+    padding: 17px 40px 28px;
   }
 
   h1 {
@@ -256,4 +393,46 @@ dd {
   }
 
   .contract-footer { grid-template-columns: 1fr; }
+}
+
+.date-input {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 32px; // room for the icon
+  }
+
+  // visible calendar icon, drawn via SVG background
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    pointer-events: none; // let clicks pass through to the invisible date input below it
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .date-picker-trigger {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 28px;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: none;
+    z-index: 2; // sits above the icon so it's still clickable
+  }
+  
 }
