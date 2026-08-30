@@ -38,14 +38,14 @@
       <label class="field"><span>RGC Status</span><select formControlName="rgcStatus"><option value="">Please Select</option>@for (status of rgcStatuses; track status) { <option [value]="status">{{ status }}</option> }</select></label>
       <label class="field"><span>Revenue Lead</span><select formControlName="revenueLead"><option value="">Please Select</option>@for (lead of revenueLeads; track lead) { <option [value]="lead">{{ lead }}</option> }</select></label>
 
-      <fieldset class="field date-field">
-        <legend>Begin Date</legend>
+      <label class="field date-field">
+        <span>Begin Date</span>
         <div class="date-controls"><select formControlName="beginDateOperator" aria-label="Begin date operator"><option value="After">After</option><option value="Before">Before</option></select><input type="date" formControlName="beginDate" aria-label="Begin date" /></div>
-      </fieldset>
-      <fieldset class="field date-field">
-        <legend>End Date</legend>
+      </label>
+      <label class="field date-field">
+        <span>End Date</span>
         <div class="date-controls"><select formControlName="endDateOperator" aria-label="End date operator"><option value="After">After</option><option value="Before">Before</option></select><input type="date" formControlName="endDate" aria-label="End date" /></div>
-      </fieldset>
+      </label>
 
       <label class="field"><span>Total Revenue</span><select formControlName="totalRevenueOperator"><option value="Equal to">Equal to</option><option value="Greater than">Greater than</option><option value="Less than">Less than</option></select></label>
       <label class="field"><span>Amount</span><input type="text" formControlName="amount" /></label>

@@ -198,6 +198,17 @@ h1 {
   border: 1px solid #7493b0;
 }
 
+.contract-card .documents-section {
+  margin: 0 10px 10px;
+  border: 0;
+  padding: 0;
+}
+
+.documents-grid { display: grid; gap: 20px; }
+.document-upload-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; gap: 20px; padding: 10px; }
+.attachment-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.document-upload-controls .edit-button { position: static; }
+
 .revenue-taken-actions {
   display: flex;
   align-items: center;
@@ -307,7 +318,7 @@ h1 {
   opacity: 0;
 }
 .revenue-taken-actions .edit-button:disabled {
-  background: #9aa5b1;
+  background: #24619c;
   cursor: not-allowed;
 }
 
@@ -357,11 +368,27 @@ h1 {
 .documents-row span,
 .address-row span { min-height: 16px; }
 
+.address-row input,
+.address-row textarea,
+.address-row select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px 6px;
+  border: 1px solid #777;
+  border-radius: 2px;
+  color: #202020;
+  font: inherit;
+}
+
+.address-row textarea { resize: vertical; }
+.address-comment-row { grid-template-columns: 1fr; }
+
 dt {
   font-weight: 700;
 }
 
-dt.required::before {
+dt.required::before,
+.address-row strong.required::before {
   content: '* ';
   color: #cc0000;
 }
@@ -393,6 +420,8 @@ dd {
   }
 
   .contract-footer { grid-template-columns: 1fr; }
+  .documents-grid { grid-template-columns: 1fr; }
+  .document-upload-controls { grid-template-columns: 1fr; }
 }
 
 .date-input {

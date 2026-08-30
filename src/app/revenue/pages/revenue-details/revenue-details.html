@@ -39,48 +39,82 @@
       <footer class="contract-footer">
         <div class="audit-field"><strong>Last Updated By</strong><span>{{ selectedContract.lastUpdatedBy ?? 'Not available' }}</span></div>
         <div class="audit-field"><strong>Last Updated Date</strong><span>{{ selectedContract.lastUpdatedDate ? (selectedContract.lastUpdatedDate | date: 'MM/dd/yyyy hh:mm') : 'Not available' }}</span></div>
-        <button class="documents-button" type="button" disabled>Download All Documents</button>
+        <button class="documents-button" type="button" (click)="downloadAllDocuments()" [disabled]="attachedDocuments().length === 0">Download All Documents</button>
       </footer>
-    </form>
 
-    <section class="detail-section documents-section" aria-labelledby="documents-heading">
-      <h2 id="documents-heading">Documents Uploaded</h2>
-      @if (selectedContract.revenueContractDocumentsUploaded?.length) {
-        @for (document of selectedContract.revenueContractDocumentsUploaded; track $index) {
-          <div class="documents-row">
-            <div><strong>Document Type</strong><span>{{ document.documentType?.documentTypeName ?? 'Contract' }}</span></div>
-            <div><strong>Files Uploaded</strong><span>
-              @for (fileName of getDocumentNamesArray(document.documentNames); track fileName) {
-                <a [href]="'#'" [attr.download]="fileName">{{ fileName }}</a>
+      <section class="detail-section documents-section" aria-labelledby="documents-heading">
+        <div class="documents-grid" [style.grid-template-columns]="isEditing() ? 'repeat(2, minmax(0, 1fr))' : '1fr'">
+          <section class="documents-panel" aria-labelledby="documents-heading">
+            <h2 id="documents-heading">Documents Uploaded</h2>
+            @if (uploadedDocuments().length) {
+              @for (document of uploadedDocuments(); track $index; let documentIndex = $index) {
+                <div class="documents-row">
+                  <div><strong>Document Type</strong><span>{{ document.documentType?.documentTypeName ?? 'Contract' }}</span></div>
+                  <div><strong>Files Uploaded</strong><span>
+                    @for (fileName of getDocumentNamesArray(document.documentNames); track fileName) {
+                      <a [href]="'#'" [attr.download]="fileName">{{ fileName }}</a>@if (isEditing()) { <button type="button" style="margin-left: 4px; padding: 0; border: 0; background: transparent; color: #24619c; font: inherit; font-weight: 700; cursor: pointer;" (click)="deleteUploadedDocument(documentIndex, fileName)" [attr.aria-label]="'Delete ' + fileName">&times;</button> }
+                    }
+                  </span></div>
+                </div>
               }
-            </span></div>
+            } @else {
+              <div class="documents-row">
+                <div><strong>Document Type</strong><span>Contract</span></div>
+                <div><strong>Files Uploaded</strong><span>No documents uploaded</span></div>
+              </div>
+            }
+          </section>
+          @if (isEditing()) {
+            <section class="documents-panel" aria-labelledby="attached-documents-heading">
+              <h2 id="attached-documents-heading">Documents Attached</h2>
+              <div class="documents-row documents-headings">
+                <div><strong>Document Type</strong></div>
+                <div><strong>Files Attached</strong></div>
+              </div>
+              @for (document of attachedDocuments(); track $index) {
+                <div class="documents-row">
+                  <div><span>{{ document.documentType }}</span></div>
+                  <div><span>{{ document.fileNames.join(', ') }}</span></div>
+                </div>
+              }
+            </section>
+          }
+        </div>
+        @if (isEditing()) {
+          <div class="document-upload-controls">
+            <label>Document Type<select style="margin-left: 10px;" [value]="selectedDocumentType()" (change)="selectedDocumentType.set($any($event.target).value)"><option value="Contract">Contract</option></select></label>
+            <div class="attachment-actions">
+              <input #documentFiles type="file" multiple aria-label="Files to attach" />
+              <button class="edit-button" type="button" (click)="attachDocuments(selectedDocumentType(), documentFiles)">Attach Document</button>
+            </div>
           </div>
         }
-      } @else {
-        <div class="documents-row">
-          <div><strong>Document Type</strong><span>Contract</span></div>
-          <div><strong>Files Uploaded</strong><span>No documents uploaded</span></div>
-        </div>
-      }
-    </section>
+      </section>
+    </form>
 
-    <section class="detail-section address-section" aria-labelledby="address-heading">
+    <section class="detail-section address-section" [formGroup]="contractForm" aria-labelledby="address-heading">
       <h2 id="address-heading">Revenue Address</h2>
       <div class="address-row">
-        <div><strong>Address1</strong><span>{{ selectedContract.address1 ?? '' }}</span></div>
-        <div><strong>Address2</strong><span>{{ selectedContract.address2 ?? '' }}</span></div>
+        <div><strong [class.required]="isEditing()">Address1</strong>@if (isEditing()) { <input type="text" formControlName="address1" [class.invalid]="addressSubmitted() && contractForm.controls.address1.invalid" aria-label="Address1" />@if (addressSubmitted() && contractForm.controls.address1.invalid) { <small class="validation-error">Address1 - is a required field.</small> } } @else { <span>{{ selectedContract.address1 ?? '' }}</span> }</div>
+        <div><strong>Address2</strong>@if (isEditing()) { <input type="text" formControlName="address2" aria-label="Address2" /> } @else { <span>{{ selectedContract.address2 ?? '' }}</span> }</div>
       </div>
       <div class="address-row">
-        <div><strong>City</strong><span>{{ selectedContract.city ?? '' }}</span></div>
-        <div><strong>State</strong><span>{{ getLookupLabel(selectedContract.state, 'stateName') }}</span></div>
+        <div><strong [class.required]="isEditing()">City</strong>@if (isEditing()) { <input type="text" formControlName="city" [class.invalid]="addressSubmitted() && contractForm.controls.city.invalid" aria-label="City" />@if (addressSubmitted() && contractForm.controls.city.invalid) { <small class="validation-error">City - is a required field.</small> } } @else { <span>{{ selectedContract.city ?? '' }}</span> }</div>
+        <div><strong [class.required]="isEditing()">State</strong>@if (isEditing()) { <select formControlName="state" [class.invalid]="addressSubmitted() && contractForm.controls.state.invalid" aria-label="State"><option value="">Please Select</option>@for (state of stateOptions(); track state) { <option [value]="state">{{ state }}</option> }</select>@if (addressSubmitted() && contractForm.controls.state.invalid) { <small class="validation-error">State - is a required field.</small> } } @else { <span>{{ getLookupLabel(selectedContract.state, 'stateName') }}</span> }</div>
       </div>
       <div class="address-row">
-        <div><strong>Zip</strong><span>{{ selectedContract.zip ?? '' }}</span></div>
-        <div><strong>Address Comment</strong><span>{{ selectedContract.addressComment ?? '' }}</span></div>
+        <div><strong [class.required]="isEditing()">Zip</strong>@if (isEditing()) { <input type="text" formControlName="zip" [class.invalid]="addressSubmitted() && contractForm.controls.zip.invalid" aria-label="Zip" />@if (addressSubmitted() && contractForm.controls.zip.invalid) { <small class="validation-error">Zip - is a required field.</small> } } @else { <span>{{ selectedContract.zip ?? '' }}</span> }</div>
+      </div>
+      <div class="address-row">
+        <div><strong>Phone</strong>@if (isEditing()) { <input type="tel" formControlName="phone" aria-label="Phone" /> } @else { <span>{{ selectedContract.phone ?? '' }}</span> }</div>
+        <div><strong>Extension</strong>@if (isEditing()) { <input type="text" formControlName="phoneExtension" aria-label="Extension" /> } @else { <span>{{ selectedContract.phoneExtension ?? '' }}</span> }</div>
+      </div>
+      <div class="address-row address-comment-row">
+        <div><strong>Comment</strong>@if (isEditing()) { <textarea formControlName="addressComment" rows="3" aria-label="Comment"></textarea> } @else { <span>{{ selectedContract.addressComment ?? '' }}</span> }</div>
       </div>
     </section>
 
-    <section class="detail-section revenue-taken-section" aria-labelledby="revenue-taken-heading">
+    <section class="detail-section revenue-taken-section" style="border: 0;" aria-labelledby="revenue-taken-heading">
       <h2 id="revenue-taken-heading">Revenue Taken In Details</h2>
       <div class="revenue-taken-actions">
         <button class="edit-button" type="button" (click)="addRevenueDetail()" [disabled]="!isEditing()">Add New Revenue Taken In Details</button>
@@ -89,7 +123,7 @@
       <div class="revenue-table-wrapper">
         <table class="revenue-table">
           <thead>
-            <tr><th>No.</th><th>Revenue Taken In</th><th>Revenue Earned Date</th><th>Invoice No.</th><th>Select All</th></tr>
+            <tr><th>No.</th><th>Revenue Taken In</th><th>Revenue Earned Date</th><th>Invoice No.</th><th><button type="button" style="padding: 0; border: 0; background: transparent; color: inherit; font: inherit; font-weight: 700; cursor: pointer;" (click)="toggleAllRevenueDetails()" [disabled]="!isEditing() || revenueTakenInDetails().length === 0">{{ allRevenueDetailsSelected() ? 'Deselect All' : 'Select All' }}</button></th></tr>
           </thead>
           <tbody>
             @for (detail of revenueTakenInDetails(); track detail.rgcRevenueId; let rowNumber = $index) {
@@ -136,13 +170,11 @@
         <div><strong>Current FY Revenue</strong><span>${{ currentFyRevenue().toFixed(2) }}</span></div>
         <div><strong>Total Revenue</strong><span>${{ currentFyRevenue().toFixed(2) }}</span></div>
       </div>
-      <!--
       <div class="revenue-footer-actions">
-        <button class="edit-button" type="button" (click)="saveRevenueDetails()" [disabled]="!isEditing()">Save</button>
-        <button class="edit-button" type="button" (click)="cancelRevenueDetails()" [disabled]="!isEditing()">Cancel</button>
-        <button class="edit-button" type="button" (click)="deleteRevenueDetails()" [disabled]="!isEditing() || selectedRevenueDetails().length === 0">Delete</button>
+        <button class="edit-button" style="position: static;" type="button" (click)="saveRevenueDetails()" [disabled]="!isEditing()">Save</button>
+        <button class="edit-button" style="position: static;" type="button" (click)="cancelRevenueDetails()" [disabled]="!isEditing()">Cancel</button>
+        <button class="edit-button" style="position: static;" type="button" (click)="deleteRevenueDetails()" [disabled]="!isEditing() || selectedRevenueDetails().length === 0">Delete</button>
       </div>
-    -->
     </section>
   } @else {
     <section class="not-found">

@@ -1,9 +1,17 @@
 import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { RevenueGeneratingContract, RevenueTakenInDetail } from '../../models/RevenueSearchCriteria';
 import { RevenueService } from '../../services/revenue.service';
+
+interface AttachedDocument {
+  documentType: string;
+  files: readonly File[];
+  fileNames: readonly string[];
+}
+
+type UploadedDocument = NonNullable<RevenueGeneratingContract['revenueContractDocumentsUploaded']>[number];
 
 @Component({
   selector: 'app-revenue-details',
@@ -19,21 +27,37 @@ export class RevenueDetails implements OnInit {
   protected readonly contract = signal<RevenueGeneratingContract | null>(null);
   protected readonly revenueTakenInDetails = signal<readonly RevenueTakenInDetail[]>([]);
   protected readonly selectedRevenueDetails = signal<readonly number[]>([]);
+  protected readonly attachedDocuments = signal<readonly AttachedDocument[]>([]);
+  protected readonly uploadedDocuments = signal<readonly UploadedDocument[]>([]);
+  protected readonly stateOptions = signal<readonly string[]>([]);
+  protected readonly selectedDocumentType = signal('Contract');
   protected readonly revenueDetailsSubmitted = signal(false);
+  protected readonly addressSubmitted = signal(false);
   protected readonly currentFyRevenue = computed(() => this.revenueTakenInDetails().reduce((total, detail) => total + (detail.rgcRevenueTakenIn ?? 0), 0));
+  protected readonly allRevenueDetailsSelected = computed(() => {
+    const details = this.revenueTakenInDetails();
+    const selected = this.selectedRevenueDetails();
+    return details.length > 0 && details.every((detail) => selected.includes(detail.rgcRevenueId));
+  });
   protected readonly isEditing = signal(false);
   protected readonly contractForm = this.formBuilder.group({
     agency: [''], division: [''], department: [''], entityName: [''], federalId: [''],
     revenueLead: [''], status: [''], beginDate: [''], endDate: [''], expectedRevenue: [''],
     objective: [''], comment: [''],
+    address1: ['', Validators.required], address2: [''], city: ['', Validators.required], state: ['', Validators.required], zip: ['', Validators.required],
+    phone: [''], phoneExtension: [''], addressComment: [''],
   });
 
   ngOnInit(): void {
     const rgcId = Number(this.route.snapshot.paramMap.get('rgcId') ?? 100000001);
+    this.revenueService.getDummyResponse().subscribe((lookups) => {
+      this.stateOptions.set(lookups.stateTypeLookupList.map((state) => state.stateName));
+    });
     this.revenueService.getRevenueContractDetail(rgcId).subscribe((selectedContract) => {
       this.contract.set(selectedContract);
       if (selectedContract) {
         this.revenueService.getRevenueTakenInDetails(rgcId).subscribe((details) => this.revenueTakenInDetails.set(details));
+        this.uploadedDocuments.set(selectedContract.revenueContractDocumentsUploaded ?? []);
         this.patchContractForm(selectedContract);
         this.contractForm.disable();
       }
@@ -54,14 +78,56 @@ export class RevenueDetails implements OnInit {
       : [...selected, rgcRevenueId]);
   }
 
+  protected toggleAllRevenueDetails(): void {
+    this.selectedRevenueDetails.set(this.allRevenueDetailsSelected()
+      ? []
+      : this.revenueTakenInDetails().map((detail) => detail.rgcRevenueId));
+  }
+
   protected deleteRevenueDetails(): void {
     const selected = this.selectedRevenueDetails();
     this.revenueTakenInDetails.update((details) => details.filter((detail) => !selected.includes(detail.rgcRevenueId)));
     this.selectedRevenueDetails.set([]);
   }
 
+  protected attachDocuments(documentType: string, fileInput: HTMLInputElement): void {
+    const files = Array.from(fileInput.files ?? []);
+    if (!files.length) return;
+
+    this.attachedDocuments.update((documents) => [...documents, { documentType, files, fileNames: files.map((file) => file.name) }]);
+    fileInput.value = '';
+  }
+
+  protected downloadAllDocuments(): void {
+    this.attachedDocuments()
+      .flatMap((document) => document.files)
+      .forEach((file) => {
+        const downloadUrl = URL.createObjectURL(file);
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = file.name;
+        link.click();
+        URL.revokeObjectURL(downloadUrl);
+      });
+  }
+
+  protected deleteUploadedDocument(documentIndex: number, fileName: string): void {
+    this.uploadedDocuments.update((documents) => documents
+      .map((document, index) => {
+        if (index !== documentIndex) return document;
+
+        const remainingNames = Object.entries(document.documentNames ?? {})
+          .filter(([, name]) => name !== fileName);
+        return remainingNames.length ? { ...document, documentNames: Object.fromEntries(remainingNames) } : null;
+      })
+      .filter((document): document is UploadedDocument => document !== null));
+  }
+
   protected saveRevenueDetails(): void {
     this.revenueDetailsSubmitted.set(true);
+    this.addressSubmitted.set(true);
+    if (this.contractForm.controls.address1.invalid || this.contractForm.controls.city.invalid
+      || this.contractForm.controls.state.invalid || this.contractForm.controls.zip.invalid) return;
     if (this.revenueTakenInDetails().some((detail) => detail.rgcRevenueTakenIn === null || detail.rgcRevenueDate === null)) return;
 
     this.revenueTakenInDetails.update((details) => details.map((detail) => ({ ...detail, isNew: false })));
@@ -74,6 +140,7 @@ export class RevenueDetails implements OnInit {
     this.revenueService.getRevenueTakenInDetails(rgcId).subscribe((details) => this.revenueTakenInDetails.set(details));
     this.selectedRevenueDetails.set([]);
     this.revenueDetailsSubmitted.set(false);
+    this.addressSubmitted.set(false);
     this.contractForm.disable();
     this.isEditing.set(false);
   }
@@ -93,7 +160,15 @@ export class RevenueDetails implements OnInit {
 
   protected enableEditing(): void {
     this.isEditing.set(true);
-    this.contractForm.disable();
+    this.addressSubmitted.set(false);
+    this.contractForm.controls.address1.enable();
+    this.contractForm.controls.address2.enable();
+    this.contractForm.controls.city.enable();
+    this.contractForm.controls.state.enable();
+    this.contractForm.controls.zip.enable();
+    this.contractForm.controls.phone.enable();
+    this.contractForm.controls.phoneExtension.enable();
+    this.contractForm.controls.addressComment.enable();
   }
 
   protected formatDateForDisplay(timestamp: string | number | null): string {
@@ -228,6 +303,14 @@ protected onDateInput(event: Event): void {
       expectedRevenue: selectedContract.expectedRevenue === null ? '' : `$${selectedContract.expectedRevenue.toFixed(2)}`,
       objective: selectedContract.objective ?? '',
       comment: selectedContract.comment ?? '',
+      address1: selectedContract.address1 ?? '',
+      address2: selectedContract.address2 ?? '',
+      city: selectedContract.city ?? '',
+      state: this.getLookupLabel(selectedContract.state, 'stateName'),
+      zip: selectedContract.zip ?? '',
+      phone: selectedContract.phone ?? '',
+      phoneExtension: selectedContract.phoneExtension ?? '',
+      addressComment: selectedContract.addressComment ?? '',
     });
   }
 
