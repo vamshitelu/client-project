@@ -92,7 +92,7 @@
       </section>
     </form>
 
-    <section class="detail-section address-section" [formGroup]="contractForm" aria-labelledby="address-heading">
+    <section class="detail-section address-section" style="border: 0;" [formGroup]="contractForm" aria-labelledby="address-heading">
       <h2 id="address-heading">Revenue Address</h2>
       <div class="address-row">
         <div><strong [class.required]="isEditing()">Address1</strong>@if (isEditing()) { <input type="text" formControlName="address1" [class.invalid]="addressSubmitted() && contractForm.controls.address1.invalid" aria-label="Address1" />@if (addressSubmitted() && contractForm.controls.address1.invalid) { <small class="validation-error">Address1 - is a required field.</small> } } @else { <span>{{ selectedContract.address1 ?? '' }}</span> }</div>
