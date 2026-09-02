@@ -1,21 +1,24 @@
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {
-  ResponseLite,
+  SearchInitLoadResponse,
   RevenueTakenInDetail,
   RevenueGeneratingContract,
   RevenueGeneratingContractListItem,
   RevenueGeneratingContractResponse,
 } from '../models/RevenueSearchCriteria';
-import responseLite from '../../../assets/data/response-lite.json';
+
 import contractResponse from '../../../assets/data/revenueGeneratingContractList.json';
 import contractDetails from '../../../assets/data/100000001.json';
+
 
 export interface RevenueSearchCriteria {
   rgcId: string;
   entityName: string;
   federalId: string;
   agency: string;
+  agencyId: string;
   division: string;
   department: string;
   rgcStatus: string;
@@ -31,13 +34,31 @@ export interface RevenueSearchCriteria {
 
 @Injectable({ providedIn: 'root' })
 export class RevenueService {
-  getDummyResponse(): Observable<ResponseLite> {
-    // return this.http.get<ResponseLite>('assets/data/response-lite.json');
-    return of(responseLite as ResponseLite);
+  private readonly http = inject(HttpClient);
+  
+
+  getSearchInitLoad(): Observable<SearchInitLoadResponse> {
+    return this.http.get<SearchInitLoadResponse>(
+      "scor/lookups/rgc"
+    );
   }
 
-  getRevenueGeneratingContracts(): Observable<RevenueGeneratingContractResponse> {
-    return of(contractResponse as unknown as RevenueGeneratingContractResponse);
+
+  getRevenueGeneratingContracts(
+    criteria: RevenueSearchCriteria,
+    page = 0,
+    size = 10,
+  ): Observable<RevenueGeneratingContractResponse> {
+    const params = new HttpParams()
+      .set('searchParams', 'agency,isStartsWith')
+      .set('searchParamValues', `${criteria.agencyId},${criteria.startsWith}`)
+      .set('page', page)
+      .set('size', size);
+
+    return this.http.get<RevenueGeneratingContractResponse>(
+      "scor/rgcontract",
+      { params },
+    );
   }
 
   getRevenueContractDetail(rgcId: number): Observable<RevenueGeneratingContract | null> {

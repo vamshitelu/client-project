@@ -50,7 +50,7 @@ export class RevenueDetails implements OnInit {
 
   ngOnInit(): void {
     const rgcId = Number(this.route.snapshot.paramMap.get('rgcId') ?? 100000001);
-    this.revenueService.getDummyResponse().subscribe((lookups) => {
+    this.revenueService.getSearchInitLoad().subscribe((lookups) => {
       this.stateOptions.set(lookups.stateTypeLookupList.map((state) => state.stateName));
     });
     this.revenueService.getRevenueContractDetail(rgcId).subscribe((selectedContract) => {

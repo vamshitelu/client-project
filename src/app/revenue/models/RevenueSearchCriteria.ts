@@ -84,7 +84,7 @@ export class StateTypeLookup {
   disable = false;
 }
 
-export class ResponseLite {
+export class SearchInitLoadResponse {
   agencyLookupList: AgencyLookup[] = [];
   divisionLookupList: DivisionLookup[] = [];
   departmentLookupList: DepartmentLookup[] = [];

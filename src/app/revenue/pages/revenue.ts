@@ -8,7 +8,7 @@ import {
   AgencyLookup,
   DepartmentLookup,
   DivisionLookup,
-  ResponseLite,
+  SearchInitLoadResponse,
   RevenueLeadLookup,
   RevenueGeneratingContractListItem,
 } from '../models/RevenueSearchCriteria';
@@ -56,12 +56,12 @@ export class Revenue implements OnInit {
   protected readonly currentPage = signal(1);
 
   ngOnInit(): void {
-    this.revenueService.getDummyResponse().subscribe((response: ResponseLite) => {
+    this.revenueService.getSearchInitLoad().subscribe((response: SearchInitLoadResponse) => {
       this.assignDropdownOptions(response);
     });
   }
 
-  private assignDropdownOptions(response: ResponseLite): void {
+  private assignDropdownOptions(response: SearchInitLoadResponse): void {
     this.agencies = response.agencyLookupList;
     this.divisionLookups = response.divisionLookupList;
     this.departmentLookups = response.departmentLookupList;
@@ -118,7 +118,7 @@ export class Revenue implements OnInit {
     const criteria = this.searchForm.getRawValue();
     console.log('Revenue search request:', criteria);
     this.revenueService.search(criteria);
-    this.revenueService.getRevenueGeneratingContracts().subscribe((response) => {
+    this.revenueService.getRevenueGeneratingContracts(criteria, 0, this.pageSize()).subscribe((response) => {
       const contracts = response._embedded.revenueGeneratingContractList;
       this.searchResults.set(contracts);
       this.totalResults.set(response.page.totalElements);
