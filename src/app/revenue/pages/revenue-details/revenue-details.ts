@@ -29,7 +29,7 @@ export class RevenueDetails implements OnInit {
   protected readonly selectedRevenueDetails = signal<readonly number[]>([]);
   protected readonly attachedDocuments = signal<readonly AttachedDocument[]>([]);
   protected readonly uploadedDocuments = signal<readonly UploadedDocument[]>([]);
-  protected readonly stateOptions = signal<readonly string[]>([]);
+  private readonly deletedDocumentNames = signal<readonly string[]>([]);
   protected readonly selectedDocumentType = signal('Contract');
   protected readonly revenueDetailsSubmitted = signal(false);
   protected readonly addressSubmitted = signal(false);
@@ -50,16 +50,16 @@ export class RevenueDetails implements OnInit {
 
   ngOnInit(): void {
     const rgcId = Number(this.route.snapshot.paramMap.get('rgcId') ?? 100000001);
-    this.revenueService.getSearchInitLoad().subscribe((lookups) => {
-      this.stateOptions.set(lookups.stateTypeLookupList.map((state) => state.stateName));
-    });
+    this.loadContract(rgcId);
+  }
+
+  private loadContract(rgcId: number): void {
     this.revenueService.getRevenueContractDetail(rgcId).subscribe((selectedContract) => {
       this.contract.set(selectedContract);
       if (selectedContract) {
         this.revenueService.getRevenueTakenInDetails(rgcId).subscribe((details) => this.revenueTakenInDetails.set(details));
         this.uploadedDocuments.set(selectedContract.revenueContractDocumentsUploaded ?? []);
         this.patchContractForm(selectedContract);
-        this.contractForm.disable();
       }
     });
   }
@@ -112,6 +112,7 @@ export class RevenueDetails implements OnInit {
   }
 
   protected deleteUploadedDocument(documentIndex: number, fileName: string): void {
+    this.deletedDocumentNames.update((fileNames) => [...fileNames, fileName]);
     this.uploadedDocuments.update((documents) => documents
       .map((document, index) => {
         if (index !== documentIndex) return document;
@@ -130,9 +131,51 @@ export class RevenueDetails implements OnInit {
       || this.contractForm.controls.state.invalid || this.contractForm.controls.zip.invalid) return;
     if (this.revenueTakenInDetails().some((detail) => detail.rgcRevenueTakenIn === null || detail.rgcRevenueDate === null)) return;
 
-    this.revenueTakenInDetails.update((details) => details.map((detail) => ({ ...detail, isNew: false })));
-    this.contractForm.disable();
-    this.isEditing.set(false);
+    const selectedContract = this.contract();
+    if (!selectedContract) return;
+
+    const formValue = this.contractForm.getRawValue();
+    const updatedContract: RevenueGeneratingContract = {
+      ...selectedContract,
+      address1: formValue.address1,
+      address2: formValue.address2,
+      city: formValue.city,
+      state: selectedContract.state ? { ...selectedContract.state, stateName: formValue.state } : null,
+      zip: formValue.zip,
+      phone: formValue.phone,
+      phoneExtension: formValue.phoneExtension,
+      addressComment: formValue.addressComment,
+      beginDate: this.parseDateValue(formValue.beginDate),
+      endDate: this.parseDateValue(formValue.endDate),
+      expectedRevenue: Number(formValue.expectedRevenue.replace(/[$,]/g, '')) || null,
+      rgcRevenueDetailsList: this.revenueTakenInDetails().map((detail) => ({ ...detail, isNew: false })),
+      revenueContractDocumentsUploaded: [...this.uploadedDocuments()],
+      docsToBeDeletedForAudit: {
+        ...(selectedContract.docsToBeDeletedForAudit ?? {}),
+        documentNames: [...this.deletedDocumentNames()],
+      },
+    };
+
+    this.revenueService.updateRevenueContract(updatedContract).subscribe((savedContract) => {
+      const savedDocuments = savedContract?.revenueContractDocumentsUploaded ?? [];
+      const attachedDocuments = this.attachedDocuments().map((document) => ({
+        documentType: null,
+        documentNames: Object.fromEntries(document.fileNames.map((fileName, index) => [String(index), fileName])),
+      }));
+      const displayedContract: RevenueGeneratingContract = {
+        ...updatedContract,
+        ...(savedContract ?? {}),
+        revenueContractDocumentsUploaded: [...savedDocuments, ...attachedDocuments],
+      };
+      this.contract.set(displayedContract);
+      this.revenueTakenInDetails.set(displayedContract.rgcRevenueDetailsList ?? []);
+      this.uploadedDocuments.set(displayedContract.revenueContractDocumentsUploaded ?? []);
+      this.attachedDocuments.set([]);
+      this.deletedDocumentNames.set([]);
+      this.patchContractForm(displayedContract);
+      this.contractForm.disable();
+      this.isEditing.set(false);
+    });
   }
 
   protected cancelRevenueDetails(): void {

@@ -49,9 +49,35 @@ export class RevenueService {
     page = 0,
     size = 10,
   ): Observable<RevenueGeneratingContractResponse> {
+    const candidateFields: Array<[string, string | boolean]> = [
+      ['rgcId', criteria.rgcId],
+      ['entityName', criteria.entityName],
+      ['federalId', criteria.federalId],
+      ['agency', criteria.agencyId],
+      ['division', criteria.division],
+      ['department', criteria.department],
+      ['rgcStatus', criteria.rgcStatus],
+      ['revenueLead', criteria.revenueLead],
+    ];
+    const searchFields = candidateFields.filter(([, value]) => value !== '');
+
+    if (criteria.beginDate) {
+      searchFields.push(['beginDateOperator', criteria.beginDateOperator], ['beginDate', criteria.beginDate]);
+    }
+
+    if (criteria.endDate) {
+      searchFields.push(['endDateOperator', criteria.endDateOperator], ['endDate', criteria.endDate]);
+    }
+
+    if (criteria.amount) {
+      searchFields.push(['totalRevenueOperator', criteria.totalRevenueOperator], ['amount', criteria.amount]);
+    }
+
+    searchFields.push(['isStartsWith', criteria.startsWith]);
+
     const params = new HttpParams()
-      .set('searchParams', 'agency,isStartsWith')
-      .set('searchParamValues', `${criteria.agencyId},${criteria.startsWith}`)
+      .set('searchParams', searchFields.map(([key]) => key).join(','))
+      .set('searchParamValues', searchFields.map(([, value]) => value).join(','))
       .set('page', page)
       .set('size', size);
 
@@ -62,8 +88,11 @@ export class RevenueService {
   }
 
   getRevenueContractDetail(rgcId: number): Observable<RevenueGeneratingContract | null> {
-    const detail = (contractDetails as RevenueGeneratingContract);
-    return of(rgcId === detail.rgcId ? detail : null);
+    return this.http.get<RevenueGeneratingContract>(`scor/rgcontracts/${rgcId}`);
+  }
+
+  updateRevenueContract(contract: RevenueGeneratingContract): Observable<RevenueGeneratingContract | null> {
+    return this.http.post<RevenueGeneratingContract | null>(`scor/rgcontracts/${contract.rgcId}`, contract);
   }
 
   getRevenueTakenInDetails(rgcId: number): Observable<readonly RevenueTakenInDetail[]> {

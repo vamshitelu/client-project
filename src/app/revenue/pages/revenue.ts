@@ -48,8 +48,7 @@ export class Revenue implements OnInit {
     );
   });
   protected readonly pagedSearchResults = computed(() => {
-    const start = (this.currentPage() - 1) * this.pageSize();
-    return this.sortedSearchResults().slice(start, start + this.pageSize());
+    return this.sortedSearchResults();
   });
   protected readonly totalResults = signal(0);
   protected readonly pageSize = signal(10);
@@ -76,6 +75,7 @@ export class Revenue implements OnInit {
     beginDate: [''], endDateOperator: ['After'], endDate: [''],
     totalRevenueOperator: ['Equal to'], amount: [''], startsWith: [false],
   });
+  private activeCriteria: ReturnType<typeof this.searchForm.getRawValue> | null = null;
 
   protected agencyChanged(agencyName: string): void {
     const selectedAgency = this.agencies.find((agency) => agency.agencyName === agencyName);
@@ -118,22 +118,31 @@ export class Revenue implements OnInit {
     const criteria = this.searchForm.getRawValue();
     console.log('Revenue search request:', criteria);
     this.revenueService.search(criteria);
-    this.revenueService.getRevenueGeneratingContracts(criteria, 0, this.pageSize()).subscribe((response) => {
+    this.activeCriteria = criteria;
+    this.loadPage(1);
+    this.searchSubmitted.set(true);
+  }
+
+  private loadPage(page: number): void {
+    if (!this.activeCriteria) {
+      return;
+    }
+
+    this.revenueService.getRevenueGeneratingContracts(this.activeCriteria, page - 1, this.pageSize()).subscribe((response) => {
       const contracts = response._embedded.revenueGeneratingContractList;
       this.searchResults.set(contracts);
       this.totalResults.set(response.page.totalElements);
-      this.currentPage.set(1);
+      this.currentPage.set(page);
     });
-    this.searchSubmitted.set(true);
   }
 
   protected pageSizeChanged(size: number): void {
     this.pageSize.set(size);
-    this.currentPage.set(1);
+    this.loadPage(1);
   }
 
   protected pageChanged(page: number): void {
-    this.currentPage.set(page);
+    this.loadPage(page);
   }
 
   protected reset(): void {
@@ -141,6 +150,7 @@ export class Revenue implements OnInit {
       beginDateOperator: 'After', endDateOperator: 'After',
       totalRevenueOperator: 'Equal to', startsWith: false,
     });
+    this.activeCriteria = null;
     this.searchSubmitted.set(false);
   }
 }

@@ -149,6 +149,7 @@ export interface RevenueGeneratingContract {
   }> | null;
   revenueContractDocumentsAttached: unknown[] | null;
   docsToBeDeletedForAudit: Record<string, unknown> | null;
+  rgcRevenueDetailsList?: RevenueTakenInDetail[];
   permissions?: readonly unknown[];
 }
 
