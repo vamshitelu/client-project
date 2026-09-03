@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, shareReplay } from 'rxjs';
 import {
   SearchInitLoadResponse,
   RevenueTakenInDetail,
@@ -35,12 +35,13 @@ export interface RevenueSearchCriteria {
 @Injectable({ providedIn: 'root' })
 export class RevenueService {
   private readonly http = inject(HttpClient);
+  private readonly searchInitLoad$ = this.http.get<SearchInitLoadResponse>(
+    'scor/lookups/rgc',
+  ).pipe(shareReplay({ bufferSize: 1, refCount: false }));
   
 
   getSearchInitLoad(): Observable<SearchInitLoadResponse> {
-    return this.http.get<SearchInitLoadResponse>(
-      "scor/lookups/rgc"
-    );
+    return this.searchInitLoad$;
   }
 
 

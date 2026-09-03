@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } 
 import { DatePipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { RevenueGeneratingContract, RevenueTakenInDetail } from '../../models/RevenueSearchCriteria';
+import { RgcDocumentTypeLookup, RevenueGeneratingContract, RevenueTakenInDetail } from '../../models/RevenueSearchCriteria';
 import { RevenueService } from '../../services/revenue.service';
 
 interface AttachedDocument {
@@ -29,6 +29,7 @@ export class RevenueDetails implements OnInit {
   protected readonly selectedRevenueDetails = signal<readonly number[]>([]);
   protected readonly attachedDocuments = signal<readonly AttachedDocument[]>([]);
   protected readonly uploadedDocuments = signal<readonly UploadedDocument[]>([]);
+  protected readonly documentTypes = signal<readonly RgcDocumentTypeLookup[]>([]);
   private readonly deletedDocumentNames = signal<readonly string[]>([]);
   protected readonly selectedDocumentType = signal('Contract');
   protected readonly revenueDetailsSubmitted = signal(false);
@@ -50,6 +51,13 @@ export class RevenueDetails implements OnInit {
 
   ngOnInit(): void {
     const rgcId = Number(this.route.snapshot.paramMap.get('rgcId') ?? 100000001);
+    this.revenueService.getSearchInitLoad().subscribe((response) => {
+      const documentTypes = response.rgcDocumentTypeLookupList.filter((documentType) => !documentType.disable);
+      this.documentTypes.set(documentTypes);
+      if (documentTypes.length && !documentTypes.some((documentType) => documentType.documentTypeName === this.selectedDocumentType())) {
+        this.selectedDocumentType.set(documentTypes[0].documentTypeName);
+      }
+    });
     this.loadContract(rgcId);
   }
 

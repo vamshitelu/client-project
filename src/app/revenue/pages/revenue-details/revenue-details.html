@@ -82,7 +82,7 @@
         </div>
         @if (isEditing()) {
           <div class="document-upload-controls">
-            <label>Document Type<select style="margin-left: 10px;" [value]="selectedDocumentType()" (change)="selectedDocumentType.set($any($event.target).value)"><option value="Contract">Contract</option></select></label>
+            <label>Document Type<select style="margin-left: 10px;" [value]="selectedDocumentType()" (change)="selectedDocumentType.set($any($event.target).value)">@for (documentType of documentTypes(); track documentType.documentTypeId) { <option [value]="documentType.documentTypeName">{{ documentType.documentTypeName }}</option> }</select></label>
             <div class="attachment-actions">
               <input #documentFiles type="file" multiple aria-label="Files to attach" />
               <button class="edit-button" type="button" (click)="attachDocuments(selectedDocumentType(), documentFiles)">Attach Document</button>

@@ -13,7 +13,7 @@ export const authTokenInterceptor: HttpInterceptorFn = (request, next) => {
   return next(request.clone({
     setHeaders: {
       userName: 'test-user',
-      'X-Auth-Token': 'OULkWmlXCVyxLHcWM78onZYvzWDXhsi-9fGKKTal0I0',
+      'X-Auth-Token': 'Ficxnc3nmo-kBdM4t8wC-Mlf1xSa1jbhagnjvQ6PlPo',
     },
   }));
 };
